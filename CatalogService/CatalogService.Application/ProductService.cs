@@ -1,7 +1,7 @@
 ﻿using CatalogService.Application.Common.Exceptions;
 using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
-using System.Runtime.CompilerServices;
+using CatalogService.Domain.Interfaces;
 
 namespace CatalogService.Application
 {

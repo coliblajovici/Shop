@@ -1,5 +1,6 @@
 ﻿using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
+using CatalogService.Domain.Interfaces;
 
 namespace CatalogService.Application
 {

@@ -1,6 +1,6 @@
 ﻿using CatalogService.Domain.Entities;
 
-namespace CatalogService.Application.Common.Interfaces
+namespace CatalogService.Domain.Interfaces
 {
     public interface IProductRepository
     {

@@ -1,5 +1,5 @@
-using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
+using CatalogService.Domain.Interfaces;
 using CatalogService.Infrastructure.Data;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;

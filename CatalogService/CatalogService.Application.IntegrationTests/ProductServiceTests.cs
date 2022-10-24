@@ -2,6 +2,7 @@ using CatalogService.Application.Common.Exceptions;
 using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
 using CatalogService.Domain.Exceptions;
+using CatalogService.Domain.Interfaces;
 using CatalogService.Infrastructure.Data;
 using FluentAssertions;
 using FluentAssertions.Common;
