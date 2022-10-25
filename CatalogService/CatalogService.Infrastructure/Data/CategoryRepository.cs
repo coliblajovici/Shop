@@ -24,10 +24,12 @@ namespace CatalogService.Infrastructure.Data
             return list;
         }
 
-        public void Add(Category category)
+        public Category Add(Category category)
         {
             _appDbContext.Categories.Add(category);
             _appDbContext.SaveChanges();
+
+            return category;
         }
 
         public void Update(Category category)
@@ -38,10 +40,13 @@ namespace CatalogService.Infrastructure.Data
 
         public void Delete(int categoryId)
         {
-            var category = _appDbContext.Categories.Where(c => c.Id == categoryId).Single();
+            var category = _appDbContext.Categories.Where(c => c.Id == categoryId).SingleOrDefault();
 
-            _appDbContext.Categories.Remove(category);
-            _appDbContext.SaveChanges();
+            if (category != null)
+            {
+                _appDbContext.Categories.Remove(category);
+                _appDbContext.SaveChanges();
+            }
         }
     }
 }

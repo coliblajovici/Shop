@@ -22,9 +22,9 @@ namespace CatalogService.Application
             return _categoryRepository.GetCatergory(categoryId);
         }
 
-        public void Add(Category category)
+        public Category Add(Category category)
         {
-            _categoryRepository.Add(category);
+            return _categoryRepository.Add(category);
         }
 
         public void Update(Category category)

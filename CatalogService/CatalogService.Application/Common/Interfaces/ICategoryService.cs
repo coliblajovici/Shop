@@ -6,7 +6,7 @@ namespace CatalogService.Application.Common.Interfaces
     {
         IEnumerable<Category> GetCategories();
         Category GetCategory(int categoryId);
-        void Add(Category category);
+        Category Add(Category category);
         void Update(Category category);
         void Delete(int categoryId);        
     }

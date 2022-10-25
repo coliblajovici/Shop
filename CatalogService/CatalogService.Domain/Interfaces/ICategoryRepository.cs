@@ -4,7 +4,7 @@ namespace CatalogService.Domain.Interfaces
 {
     public interface ICategoryRepository
     {
-        void Add(Category category);
+        Category Add(Category category);
         void Delete(int categoryId);
         IEnumerable<Category> GetCatergories();
         Category GetCatergory(int categoryId);
