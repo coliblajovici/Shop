@@ -1,8 +1,18 @@
+using CatalogService.Application.Common.Interfaces;
+using CatalogService.Application;
 using Microsoft.Extensions.DependencyInjection;
+using CatalogService.Api.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using CatalogService.Api.Setup;
+using CatalogService.Api.Models.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.ConfigureUrlHelper();
+builder.Services.AddScoped<IItemResourceBuilder, ItemResourceBuilder>();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddControllers();

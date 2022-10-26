@@ -26,7 +26,7 @@ namespace CatalogService.Application
             return _productRepository.GetProduct(productId);
         }
 
-        public void Add(Product product)
+        public Product Add(Product product)
         {
             var category = _categoryRepository.GetCatergory(product.CategoryId);
 
@@ -35,7 +35,7 @@ namespace CatalogService.Application
                 throw new NotFoundException("Category", product.CategoryId);
             }
 
-            _productRepository.Add(product);
+            return _productRepository.Add(product);
         }
 
         public void Update(Product product)

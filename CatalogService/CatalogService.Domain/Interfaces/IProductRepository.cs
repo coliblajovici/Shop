@@ -6,7 +6,7 @@ namespace CatalogService.Domain.Interfaces
     {
         Product GetProduct(int productId);
         IEnumerable<Product> GetProducts();
-        void Add(Product product);
+        Product Add(Product product);
         void Update(Product product);
         void Delete(int productId);
     }

@@ -1,3 +1,4 @@
+using CatalogService.Api.Dto;
 using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;

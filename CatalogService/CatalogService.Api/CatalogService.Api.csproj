@@ -9,6 +9,10 @@
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
+  
+   <PropertyGroup>
+	<IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CatalogService.Application\CatalogService.Application.csproj" />

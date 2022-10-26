@@ -24,10 +24,12 @@ namespace CatalogService.Infrastructure.Data
             return list;
         }
 
-        public void Add(Product product)
+        public Product Add(Product product)
         {
             _appDbContext.Products.Add(product);
             _appDbContext.SaveChanges();
+
+            return product;
         }
 
         public void Update(Product product)
