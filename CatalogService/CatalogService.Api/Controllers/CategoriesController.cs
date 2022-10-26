@@ -40,9 +40,15 @@ namespace CatalogService.Api.Controllers
         [HttpGet("{categoryId:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public Category GetCategoryById([FromRoute]int categoryId)
+        public IActionResult GetCategoryById([FromRoute]int categoryId)
         {
-            return _categoryService.GetCategory(categoryId);
+            var category = _categoryService.GetCategory(categoryId);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
         }
 
         /// <summary>
@@ -51,9 +57,9 @@ namespace CatalogService.Api.Controllers
         /// <response code="200">Returns the list of categories</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IEnumerable<Category> GetCategoryList()
+        public IActionResult GetCategoryList()
         {
-            return _categoryService.GetCategories();
+            return Ok(_categoryService.GetCategories());
         }
 
         /// <summary>
