@@ -114,14 +114,14 @@ namespace CartingService.IntegrationTests.Application
         private static void CleanupDb()
         {
             // TODO - Rewrite cleanup meachanism
-            if (File.Exists("D:\\Work\\.NET Mentoring\\Shop\\LiteDB\\MyData2.db"))
+            if (File.Exists("D:\\Work\\.NET Mentoring\\Shop\\CartingService\\LiteDB\\MyData2.db"))
             {
-                File.Delete("D:\\Work\\.NET Mentoring\\Shop\\LiteDB\\MyData2.db");
+                File.Delete("D:\\Work\\.NET Mentoring\\Shop\\CartingService\\LiteDB\\MyData2.db");
             }
 
-            if (File.Exists("D:\\Work\\.NET Mentoring\\Shop\\LiteDB\\MyData2-log.db"))
+            if (File.Exists("D:\\Work\\.NET Mentoring\\Shop\\CartingService\\LiteDB\\MyData2-log.db"))
             {
-                File.Delete("D:\\Work\\.NET Mentoring\\Shop\\LiteDB\\MyData2-log.db");
+                File.Delete("D:\\Work\\.NET Mentoring\\Shop\\CartingService\\LiteDB\\MyData2-log.db");
             }
         }
     }
