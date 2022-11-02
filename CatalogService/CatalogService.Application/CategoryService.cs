@@ -19,7 +19,7 @@ namespace CatalogService.Application
 
         public Category GetCategory(int categoryId)
         {
-            return _categoryRepository.GetCatergory(categoryId);
+            return _categoryRepository.GetCategory(categoryId);
         }
 
         public Category Add(Category category)

@@ -12,7 +12,7 @@ namespace CatalogService.Infrastructure.Data
             _appDbContext = appDbContext ?? throw new ArgumentNullException(nameof(appDbContext));
         }
 
-        public Category GetCatergory(int categoryId)
+        public Category GetCategory(int categoryId)
         {
             return _appDbContext.Categories.Where(c => c.Id == categoryId).SingleOrDefault();         
         }

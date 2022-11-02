@@ -7,7 +7,7 @@ namespace CatalogService.Domain.Interfaces
         Category Add(Category category);
         void Delete(int categoryId);
         IEnumerable<Category> GetCatergories();
-        Category GetCatergory(int categoryId);
+        Category GetCategory(int categoryId);
         void Update(Category category);
     }
 }

@@ -28,7 +28,7 @@ namespace CatalogService.Application
 
         public Product Add(Product product)
         {
-            var category = _categoryRepository.GetCatergory(product.CategoryId);
+            var category = _categoryRepository.GetCategory(product.CategoryId);
 
             if (category == null)
             {
@@ -40,7 +40,7 @@ namespace CatalogService.Application
 
         public void Update(Product product)
         {
-            var category = _categoryRepository.GetCatergory(product.CategoryId);
+            var category = _categoryRepository.GetCategory(product.CategoryId);
 
             if (category == null)
             {

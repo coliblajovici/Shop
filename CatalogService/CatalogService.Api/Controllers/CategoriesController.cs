@@ -37,9 +37,11 @@ namespace CatalogService.Api.Controllers
         /// </summary>        
         /// <response code="200">The category was found</response>
         /// <response code="404">The category was not found</response>
+        /// <response code="500">A server fault occurred</response>
         [HttpGet("{categoryId:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetCategoryById([FromRoute]int categoryId)
         {
             var category = _categoryService.GetCategory(categoryId);
@@ -48,6 +50,7 @@ namespace CatalogService.Api.Controllers
             {
                 return NotFound();
             }
+
             return Ok(category);
         }
 
@@ -55,8 +58,10 @@ namespace CatalogService.Api.Controllers
         /// Returns the list of categories
         /// </summary>
         /// <response code="200">Returns the list of categories</response>
+        /// <response code="500">A server fault occurred</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetCategoryList()
         {
             return Ok(_categoryService.GetCategories());
@@ -67,9 +72,11 @@ namespace CatalogService.Api.Controllers
         /// </summary>
         /// <response code="201">The category was created successfully. Also includes 'location' header to newly created category</response>
         /// <response code="400">The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications</response>
+        /// <response code="500">A server fault occurred</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddCategory([FromBody] CategoryDto categoryDto)
         {
             var category = new Category(categoryDto.Name, categoryDto.ImageUrl);
@@ -90,9 +97,18 @@ namespace CatalogService.Api.Controllers
         [HttpDelete("{categoryId:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteCategory([FromRoute] int categoryId)
         {
+            var category = _categoryService.GetCategory(categoryId);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
             _categoryService.Delete(categoryId);
+
             return NoContent();
         }
 
@@ -106,9 +122,16 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateCategory([FromRoute] int categoryId, [FromBody] CategoryDto categoryDto)
         {
             var category = _categoryService.GetCategory(categoryId);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
             category.UpdateName(categoryDto.Name);
             category.UpdateImageUrl(categoryDto.ImageUrl);
             

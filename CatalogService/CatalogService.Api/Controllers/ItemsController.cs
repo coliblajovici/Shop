@@ -44,6 +44,7 @@ namespace CatalogService.Api.Controllers
         [HttpGet("{itemId:int}", Name =nameof(GetItemById))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ItemResource GetItemById([FromRoute]int itemId)
         {
             var product = _productService.GetProduct(itemId);
@@ -57,6 +58,7 @@ namespace CatalogService.Api.Controllers
         /// <response code="200">Returns the list of items</response>
         [HttpGet(Name =nameof(GetItems))]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IEnumerable<Product> GetItems()
         {
             return _productService.GetProducts();
@@ -70,6 +72,7 @@ namespace CatalogService.Api.Controllers
         [HttpPost(Name = nameof(AddItem))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddItem([FromBody] ProductDto productDto)
         {
             var product = new Product(productDto.Name, productDto.Description, productDto.ImageUrl, productDto.CategoryId, productDto.Price, productDto.Amount);
@@ -90,6 +93,7 @@ namespace CatalogService.Api.Controllers
         [HttpDelete("{itemId:int}", Name = nameof(DeleteItem))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteItem([FromRoute] int itemId)
         {
             _productService.Delete(itemId);
@@ -106,6 +110,7 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateItem([FromRoute] int itemId, [FromBody] ProductDto productDto)
         {
             var product = _productService.GetProduct(itemId);
