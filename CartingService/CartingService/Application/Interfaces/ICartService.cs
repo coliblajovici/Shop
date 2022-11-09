@@ -13,5 +13,7 @@ namespace CartingService.Application.Interfaces
 
         public void RemoveItem(Guid cartId, int cartItemId);
 
+        public Task UpdateCartItemAsync(CartItem cartItem);
+
     }
 }

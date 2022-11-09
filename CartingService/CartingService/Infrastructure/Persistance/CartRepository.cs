@@ -65,7 +65,32 @@ namespace CartingService.Infrastructure.Persistance
 
             cart.CartItems.Remove(cartItem);
             collection.Update(cart);
+        }
 
+        public async Task UpdateCartItemAsync(CartItem cartItem)
+        {
+            var collection = _liteDb.GetCollection<Cart>("Carts");            
+            foreach (var cart in collection.FindAll())
+            {
+                var item = cart.CartItems.Find(p => p.Id == cartItem.Id);
+                if (item != null)
+                {
+                    item.Quantity = cartItem.Quantity;
+                    item.Price = cartItem.Price;
+                    item.Name = cartItem.Name;
+
+                    if (cartItem.ImageItem != null)
+                    {
+                        if (item.ImageItem == null)
+                        {
+                            item.ImageItem = new ImageItem();
+                        }
+                        item.ImageItem.AltText = cartItem.ImageItem.AltText;
+                        item.ImageItem.Url = cartItem.ImageItem.Url;
+                    }
+                    collection.Update(cart);
+                }
+            }            
         }
 
         public void Dispose()
@@ -85,6 +110,6 @@ namespace CartingService.Infrastructure.Persistance
             {
                 _liteDb.Dispose();
             }
-        }
+        }       
     }
 }

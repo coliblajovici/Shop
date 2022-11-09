@@ -11,5 +11,7 @@ namespace CartingService.Infrastructure.Persistance
         public void AddCartItem(Guid cartId, CartItem cartItem);
 
         public void RemoveItem(Guid cartId, int cartItemId);
+
+        public Task UpdateCartItemAsync(CartItem cartItem);
     }
 }

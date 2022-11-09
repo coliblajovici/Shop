@@ -5,19 +5,20 @@ using CatalogService.Domain.Exceptions;
 using CatalogService.Domain.Interfaces;
 using CatalogService.Infrastructure.Data;
 using FluentAssertions;
-using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
+using Moq;
+using ShopServiceBusClient;
 
 namespace CatalogService.Application.IntegrationTests
 {
     public class ProductServiceTests
     {
-        private IProductService _productService;
-        private IProductRepository _productRepository;
-        private ICategoryRepository _categoryRepository;
-        private AppDbContext _appDbContext;
+        private readonly IProductService _productService;
+        private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly AppDbContext _appDbContext;
+        private readonly Mock<IEventBus> _eventBusMock;
 
         public ProductServiceTests()
         {          
@@ -26,7 +27,9 @@ namespace CatalogService.Application.IntegrationTests
 
             _productRepository = new ProductRepository(_appDbContext);
             _categoryRepository = new CategoryRepository(_appDbContext);
-            _productService = new ProductService(_productRepository,_categoryRepository);
+
+            _eventBusMock = new Mock<IEventBus>();
+            _productService = new ProductService(_productRepository,_categoryRepository, _eventBusMock.Object);
 
             SetupDB();
         }         
@@ -81,7 +84,7 @@ namespace CatalogService.Application.IntegrationTests
             product.CategoryId = 1000;
 
             FluentActions.Invoking(() =>
-              _productService.Update(product)).Should().Throw<NotFoundException>();
+              _productService.Update(product)).Should().ThrowAsync<NotFoundException>();
         }
 
         [Test]

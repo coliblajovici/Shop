@@ -20,6 +20,7 @@
    </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ShopServiceBusClient\ShopServiceBusClient.csproj" />
     <ProjectReference Include="..\CatalogService.Application\CatalogService.Application.csproj" />
     <ProjectReference Include="..\CatalogService.Infrastructure\CatalogService.Infrastructure.csproj" />
   </ItemGroup>

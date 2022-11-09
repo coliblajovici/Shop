@@ -1,7 +1,9 @@
 ﻿using CatalogService.Application.Common.Exceptions;
 using CatalogService.Application.Common.Interfaces;
+using CatalogService.Application.Events;
 using CatalogService.Domain.Entities;
 using CatalogService.Domain.Interfaces;
+using ShopServiceBusClient;
 
 namespace CatalogService.Application
 {
@@ -9,11 +11,13 @@ namespace CatalogService.Application
     {
         private IProductRepository _productRepository;
         private ICategoryRepository _categoryRepository;
+        private IEventBus _eventBus;
 
-        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IEventBus eventBus)
         {
             _productRepository = productRepository;
-            _categoryRepository = categoryRepository;   
+            _categoryRepository = categoryRepository; 
+            _eventBus = eventBus;
         }
 
         public IEnumerable<Product> GetProducts()
@@ -38,7 +42,7 @@ namespace CatalogService.Application
             return _productRepository.Add(product);
         }
 
-        public void Update(Product product)
+        public async Task Update(Product product)
         {
             var category = _categoryRepository.GetCategory(product.CategoryId);
 
@@ -47,7 +51,17 @@ namespace CatalogService.Application
                 throw new NotFoundException("Category", product.CategoryId);
             }
 
-            _productRepository.Update(product);
+            var productChanged = new ProductChangedIntegrationEvent(product.Id, product.Name, product.Description, product.ImageUrl, product.CategoryId, product.Price, product.Amount);
+
+            try
+            {
+                _productRepository.Update(product);
+                await _eventBus.PublishAsync(productChanged);
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
         }
 
         public void Delete(int productId)

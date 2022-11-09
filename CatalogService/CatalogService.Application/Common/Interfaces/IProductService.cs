@@ -7,7 +7,7 @@ namespace CatalogService.Application.Common.Interfaces
         Product GetProduct(int productId);
         IEnumerable<Product> GetProducts();
         Product Add(Product product);
-        void Update(Product product);
+        Task Update(Product product);
         void Delete(int productId);
         
     }

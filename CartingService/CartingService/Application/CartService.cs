@@ -39,5 +39,9 @@ namespace CartingService.Application
             _cartRepository.RemoveItem(cartId, cartItemId);
         }
 
+        public async Task UpdateCartItemAsync(CartItem cartItem)
+        {
+            await _cartRepository.UpdateCartItemAsync(cartItem);
+        }
     }
 }

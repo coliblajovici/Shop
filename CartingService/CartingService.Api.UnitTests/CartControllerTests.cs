@@ -106,7 +106,6 @@ namespace CartingService.Api.UnitTests
                     {
                         new CartItem() { Id = 4, Name = "Test", Price = 100, Quantity = 10 }
                     }
-
             };
             return cart;
         }

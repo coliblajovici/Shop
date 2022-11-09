@@ -1,4 +1,3 @@
-using CartingService.Api.Models;
 using CartingService.Application.Interfaces;
 using CartingService.Application.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +13,12 @@ namespace CatalogService.Api.Controllers
     public class CartController : ControllerBase
     {       
         private readonly ILogger<CartController> _logger;
-        private readonly ICartService _cartService;
+        private readonly ICartService _cartService;        
 
         public CartController(ICartService cartService, ILogger<CartController> logger)
         {
             _cartService = cartService ?? throw new ArgumentNullException(nameof(cartService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));            
         }
 
         /// <summary>
@@ -52,8 +51,8 @@ namespace CatalogService.Api.Controllers
             if (cart == null)
             {
                 return NotFound();
-            }                   
-           
+            }
+            
             return Ok(cart);
         }
 

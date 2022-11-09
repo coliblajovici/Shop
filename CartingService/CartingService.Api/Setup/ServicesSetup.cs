@@ -12,7 +12,7 @@ namespace CartingService.Api.Setup
             services.AddScoped<ICartService, CartService>()
                     .AddScoped<ICartRepository, CartRepository>();
 
-            services.AddTransient<LiteDatabase, LiteDatabase>(db => new LiteDatabase(configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton<LiteDatabase, LiteDatabase>(db => new LiteDatabase(configuration.GetConnectionString("DefaultConnection")));
             
             return services;
         }

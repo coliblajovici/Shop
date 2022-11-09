@@ -4,6 +4,7 @@ using CatalogService.Api.Models.Interfaces;
 using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using ShopServiceBusClient;
 
 namespace CatalogService.Api.Controllers
 {
@@ -122,7 +123,7 @@ namespace CatalogService.Api.Controllers
             product.SetAmount(productDto.Amount);
             
             _productService.Update(product);
-
+            
             return NoContent();
         }
     }

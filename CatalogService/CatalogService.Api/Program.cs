@@ -15,6 +15,7 @@ builder.Services.ConfigureUrlHelper();
 builder.Services.AddScoped<IItemResourceBuilder, ItemResourceBuilder>();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.ConfigureServiceBus(builder.Configuration);
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
