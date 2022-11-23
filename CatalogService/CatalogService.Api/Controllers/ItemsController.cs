@@ -3,12 +3,19 @@ using CatalogService.Api.Models;
 using CatalogService.Api.Models.Interfaces;
 using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.Resource;
 using ShopServiceBusClient;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Web.Http.Filters;
 
 namespace CatalogService.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/items")]
     [Produces("application/json", "application/xml")]
     [Consumes("application/json", "application/xml")]
@@ -17,12 +24,19 @@ namespace CatalogService.Api.Controllers
         private readonly ILogger<ItemsController> _logger;
         private readonly IProductService _productService;
         private readonly IItemResourceBuilder _itemResourceBuilder;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public ItemsController(IProductService productService, ILogger<ItemsController> logger, IItemResourceBuilder itemResourceBuilder)
+        private string _currentPrincipalId = string.Empty;
+
+
+        public ItemsController(IProductService productService, ILogger<ItemsController> logger, IItemResourceBuilder itemResourceBuilder, IHttpContextAccessor contextAccessor)
         {
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _itemResourceBuilder = itemResourceBuilder ?? throw new ArgumentNullException(nameof(itemResourceBuilder));
+            _contextAccessor = contextAccessor;
+
+            _currentPrincipalId = GetCurrentClaimsPrincipal()?.GetObjectId();
         }
 
         /// <summary>
@@ -42,7 +56,7 @@ namespace CatalogService.Api.Controllers
         /// </summary>        
         /// <response code="200">The item was found</response>
         /// <response code="404">The item was not found</response>
-        [HttpGet("{itemId:int}", Name =nameof(GetItemById))]
+        [HttpGet("{itemId:int}", Name =nameof(GetItemById))] 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -59,7 +73,7 @@ namespace CatalogService.Api.Controllers
         /// <response code="200">Returns the list of items</response>
         [HttpGet(Name =nameof(GetItems))]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]        
         public IEnumerable<Product> GetItems()
         {
             return _productService.GetProducts();
@@ -74,6 +88,9 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [RequiredScopeOrAppPermission(
+            AcceptedScope = new string[] { "Catalog.Write" }
+        )]
         public IActionResult AddItem([FromBody] ProductDto productDto)
         {
             var product = new Product(productDto.Name, productDto.Description, productDto.ImageUrl, productDto.CategoryId, productDto.Price, productDto.Amount);
@@ -95,6 +112,9 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [RequiredScopeOrAppPermission(
+            AcceptedScope = new string[] { "Catalog.Write" }
+        )]
         public IActionResult DeleteItem([FromRoute] int itemId)
         {
             _productService.Delete(itemId);
@@ -112,6 +132,9 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [RequiredScopeOrAppPermission(
+            AcceptedScope = new string[] { "Catalog.Write" }
+        )]
         public IActionResult UpdateItem([FromRoute] int itemId, [FromBody] ProductDto productDto)
         {
             var product = _productService.GetProduct(itemId);
@@ -125,6 +148,23 @@ namespace CatalogService.Api.Controllers
             _productService.Update(product);
             
             return NoContent();
+        }
+
+        /// <summary>
+        /// returns the current claimsPrincipal (user/Client app) dehydrated from the Access token
+        /// </summary>
+        /// <returns></returns>
+        private ClaimsPrincipal GetCurrentClaimsPrincipal()
+        {
+            // Irrespective of whether a user signs in or not, the AspNet security middle-ware dehydrates the claims in the
+            // HttpContext.User.Claims collection
+
+            if (_contextAccessor.HttpContext != null && _contextAccessor.HttpContext.User != null)
+            {
+                return _contextAccessor.HttpContext.User;
+            }
+
+            return null;
         }
     }
 }
