@@ -15,7 +15,6 @@ using System.Web.Http.Filters;
 namespace CatalogService.Api.Controllers
 {
     [ApiController]
-    [Authorize]
     [Route("api/items")]
     [Produces("application/json", "application/xml")]
     [Consumes("application/json", "application/xml")]
@@ -35,8 +34,6 @@ namespace CatalogService.Api.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _itemResourceBuilder = itemResourceBuilder ?? throw new ArgumentNullException(nameof(itemResourceBuilder));
             _contextAccessor = contextAccessor;
-
-            _currentPrincipalId = GetCurrentClaimsPrincipal()?.GetObjectId();
         }
 
         /// <summary>

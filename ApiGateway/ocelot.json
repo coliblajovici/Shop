@@ -1,0 +1,182 @@
+﻿{
+  "Routes": [
+    // catalog routes
+    {
+      "DownstreamPathTemplate": "/api/item-properties/{itemId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7138
+        }
+      ],
+      "UpstreamPathTemplate": "/api/item-properties/{itemId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "ItemProperties",
+      "SwaggerKey": "catalog"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/items/{itemId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7138
+        }
+      ],
+      "UpstreamPathTemplate": "/api/items/{itemId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "Item",
+      "SwaggerKey": "catalog"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/items",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7138
+        }
+      ],
+      "UpstreamPathTemplate": "/api/items",
+      "UpstreamHttpMethod": [ "Get" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 60,
+        "Region": "test"
+      },
+      "SwaggerKey": "catalog"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/categories/{categoryId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7138
+        }
+      ],
+      "UpstreamPathTemplate": "/api/categories/{categoryId}",
+      "SwaggerKey": "catalog"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/categories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7138
+        }
+      ],
+      "UpstreamPathTemplate": "/api/categories",
+      "UpstreamHttpMethod": [ "Get" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 60,
+        "Region": "test"
+      },
+      "SwaggerKey": "catalog"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/items",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7138
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      },
+      "UpstreamPathTemplate": "/api/items",
+      "UpstreamHttpMethod": [ "Post", "Put", "Delete" ],
+      "SwaggerKey": "catalog"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/categories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7138
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      },
+      "UpstreamPathTemplate": "/api/categories",
+      "UpstreamHttpMethod": [ "Post", "Put", "Delete" ],
+      "SwaggerKey": "catalog"
+    },
+
+    // cart 
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7015
+        }
+      ],
+      "UpstreamPathTemplate": "/cartapi/{everything}",
+      "UpstreamHttpMethod": [],
+      "SwaggerKey": "cart"
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "Item",
+        "ItemProperties"
+      ],
+      "UpstreamPathTemplate": "/api/item-aggregate/{itemId}"
+    }
+  ],
+
+  "SwaggerEndPoints": [
+    {
+      "Key": "cart",
+      "Config": [
+        {
+          "Name": "Carting Service API",
+          "Version": "v1",
+          "Url": "https://localhost:7015/swagger/v1/swagger.json"
+        },
+        {
+          "Name": "Carting Service API",
+          "Version": "v2",
+          "Url": "https://localhost:7015/swagger/v2/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "catalog",
+      "Config": [
+        {
+          "Name": "Catalog API",
+          "Version": "v1",
+          "Url": "https://localhost:7138/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+
+  "GlobalConfiguration": {
+    "BaseUrl": "localhost:7270"
+  }
+
+}

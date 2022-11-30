@@ -18,7 +18,6 @@ namespace CatalogService.Api.Setup
                     Description = "An ASP.NET Core Web API for Catalogs",                    
                 });
 
-                // using System.Reflection;
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
