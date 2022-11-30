@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CartingService.IntegrationT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CartingService", "CartingService\CartingService\CartingService.csproj", "{57047BBD-2B66-405F-9170-A03EE4D5FEF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthApi", "AuthApi\AuthApi.csproj", "{47BACBC3-62CC-4FBF-A764-1AF9C8E58687}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{57047BBD-2B66-405F-9170-A03EE4D5FEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57047BBD-2B66-405F-9170-A03EE4D5FEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57047BBD-2B66-405F-9170-A03EE4D5FEF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47BACBC3-62CC-4FBF-A764-1AF9C8E58687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47BACBC3-62CC-4FBF-A764-1AF9C8E58687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47BACBC3-62CC-4FBF-A764-1AF9C8E58687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47BACBC3-62CC-4FBF-A764-1AF9C8E58687}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

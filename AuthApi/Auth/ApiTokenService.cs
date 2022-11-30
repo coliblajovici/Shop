@@ -1,9 +1,10 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace ApiGateway.Auth
+namespace AuthApi.Auth
 {
     public class ApiTokenService
     {
@@ -33,5 +34,4 @@ namespace ApiGateway.Auth
             return authToken;
         }
     }
-
 }

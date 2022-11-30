@@ -13,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.AddAuthentication().AddJwtBearer("Bearer", options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters()

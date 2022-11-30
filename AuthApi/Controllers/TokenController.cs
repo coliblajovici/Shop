@@ -1,17 +1,17 @@
-﻿using ApiGateway.Auth;
+﻿using AuthApi.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiGateway.Controllers
 {
+    [Route("api/token")]
     [ApiController]
-    [Route("[controller]")]
-    public class AuthController : ControllerBase
+    [AllowAnonymous]
+    public class TokenController : ControllerBase
     {
         [HttpPost]
-        [Route("products")]
         [AllowAnonymous]
-        public ActionResult<AuthToken> GetProductsAuthentication([FromBody] AuthUser user)
+        public ActionResult<AuthToken> GetToken([FromBody] AuthUser user)
         {
             return new ApiTokenService().GenerateToken(user);
         }

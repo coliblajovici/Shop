@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApiGateway.Auth
+namespace AuthApi.Auth
 {
     public class AuthUser
     {

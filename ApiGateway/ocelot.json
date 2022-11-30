@@ -59,6 +59,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/categories/{categoryId}",
+      "UpstreamHttpMethod": [ "Get" ],
       "SwaggerKey": "catalog"
     },
 
@@ -80,6 +81,28 @@
       "SwaggerKey": "catalog"
     },
 
+
+    {
+      "DownstreamPathTemplate": "/api/items/{itemId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7138
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      },
+      "UpstreamPathTemplate": "/api/items/{itemId}",
+      "UpstreamHttpMethod": [ "Put", "Delete" ],
+      "SwaggerKey": "catalog"
+    },
+
     {
       "DownstreamPathTemplate": "/api/items",
       "DownstreamScheme": "https",
@@ -97,7 +120,28 @@
         "Role": "Admin"
       },
       "UpstreamPathTemplate": "/api/items",
-      "UpstreamHttpMethod": [ "Post", "Put", "Delete" ],
+      "UpstreamHttpMethod": [ "Post"],
+      "SwaggerKey": "catalog"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/categories/{categoryId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7138
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      },
+      "UpstreamPathTemplate": "/api/categories/{categoryId}",
+      "UpstreamHttpMethod": [ "Put", "Delete" ],
       "SwaggerKey": "catalog"
     },
 
@@ -118,7 +162,7 @@
         "Role": "Admin"
       },
       "UpstreamPathTemplate": "/api/categories",
-      "UpstreamHttpMethod": [ "Post", "Put", "Delete" ],
+      "UpstreamHttpMethod": [ "Post" ],
       "SwaggerKey": "catalog"
     },
 

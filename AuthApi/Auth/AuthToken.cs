@@ -1,4 +1,4 @@
-﻿namespace ApiGateway.Auth
+﻿namespace AuthApi.Auth
 {
     public class AuthToken
     {
