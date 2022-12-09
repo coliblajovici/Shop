@@ -5,9 +5,12 @@ using CatalogService.Application.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// The following line enables Application Insights telemetry collection.
+builder.Services.AddApplicationInsightsTelemetry(opt => { opt.EnableAdaptiveSampling = false; opt.EnableDebugLogger = true; });
+
 // Add services to the container.
 builder.Services.ConfigureUrlHelper();
-builder.Services.ConfigureAuth(builder.Configuration);
+//builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddScoped<IItemResourceBuilder, ItemResourceBuilder>();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);

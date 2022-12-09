@@ -18,17 +18,25 @@ namespace CartingService.Api.Events
 
         async Task IIntegrationEventHandler<ProductChangedIntegrationEvent>.HandleAsync(ProductChangedIntegrationEvent @event)
         {
-            CartItem cartItem = new CartItem();
-            cartItem.Id = @event.Id;
-            cartItem.Name = @event.Name;
-            cartItem.Price = @event.Price;
-
-            if (!String.IsNullOrEmpty(@event.ImageUrl))
+            try
             {
-                cartItem.ImageItem = new ImageItem() { Url = @event.ImageUrl };
-            }
+                CartItem cartItem = new CartItem();
+                cartItem.Id = @event.Id;
+                cartItem.Name = @event.Name;
+                cartItem.Price = @event.Price;
 
-            await _service.UpdateCartItemAsync(cartItem);
+                if (!String.IsNullOrEmpty(@event.ImageUrl))
+                {
+                    cartItem.ImageItem = new ImageItem() { Url = @event.ImageUrl };
+                }
+
+                await _service.UpdateCartItemAsync(cartItem);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error was encountered during processing of the ProductChangedIntegrationEvent");
+            }
         }
 
 

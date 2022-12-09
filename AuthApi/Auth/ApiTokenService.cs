@@ -10,7 +10,7 @@ namespace AuthApi.Auth
     {
         public AuthToken GenerateToken(AuthUser user)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("catalog-service-secret"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("catalog-service-secret-updated-new-change-12345"));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             var expirationDate = DateTime.UtcNow.AddHours(2);
 

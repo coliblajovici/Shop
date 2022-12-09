@@ -6,8 +6,10 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// The following line enables Application Insights telemetry collection.
+builder.Services.AddApplicationInsightsTelemetry();
 
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -18,7 +20,7 @@ builder.Services.AddAuthentication().AddJwtBearer("Bearer", options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters()
     {
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("catalog-service-secret")),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("catalog-service-secret-updated-new-change-12345")),
         ValidAudience = "catalogAudience",
         ValidIssuer = "catalogIssuer",
         ValidateIssuerSigningKey = true,

@@ -121,12 +121,14 @@ namespace ShopServiceBusClient
             {
                 var subscriptions = _subscriptionManager.GetHandlersForEvent(eventName);
                 foreach (var subscription in subscriptions)
-                {
+                {                    
                     var handler = _serviceProvider.GetService(subscription.HandlerType);
                     if (handler == null) continue;
 
                     var eventType = _subscriptionManager.GetEventTypeByName(eventName);
                     var messageData = Encoding.UTF8.GetString(arg.Message.Body);
+
+                    _logger.LogInformation($"Service Bus Message: {messageData}");
 
                     var integrationEvent = JsonSerializer.Deserialize(messageData, eventType);
                     var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);

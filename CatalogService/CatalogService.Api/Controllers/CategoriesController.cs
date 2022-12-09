@@ -2,6 +2,7 @@ using CatalogService.Api.Dto;
 using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace CatalogService.Api.Controllers
 {
@@ -83,6 +84,8 @@ namespace CatalogService.Api.Controllers
 
             var createdCategory = _categoryService.Add(category);
 
+            _logger.LogInformation($"Added category with id {createdCategory.Id}.");
+
             return CreatedAtAction(
               actionName: nameof(GetCategoryById),
               routeValues: new { categoryId = createdCategory.Id },
@@ -136,6 +139,7 @@ namespace CatalogService.Api.Controllers
             category.UpdateImageUrl(categoryDto.ImageUrl);
             
             _categoryService.Update(category);
+            _logger.LogInformation($"Updated category with id {category.Id} ({category.Name},{category.ImageUrl}).");
 
             return NoContent();
         }

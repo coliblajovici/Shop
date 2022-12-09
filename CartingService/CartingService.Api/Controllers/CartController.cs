@@ -98,6 +98,7 @@ namespace CatalogService.Api.Controllers
             item.Price = cartItem.Price;            
             
              _cartService.AddItem(cartId, item);
+            _logger.LogInformation($"Added item {item.Id}, {item.Name} to cart with Id {cartId}.");
 
             return Ok();            
         }
@@ -122,7 +123,8 @@ namespace CatalogService.Api.Controllers
             }
 
             _cartService.RemoveItem(cartId, cartItemId);
-         
+            _logger.LogInformation($"Removed item {cartItemId} from cart with Id {cartId}.");
+
             return Ok();
         }  
     }

@@ -30,7 +30,7 @@ namespace CartingService.Api.Setup
             services.AddSingleton(implementationFactory =>
             {
                 var serviceBusClient = implementationFactory.GetRequiredService<ServiceBusClient>();                
-                var serviceBusSender = serviceBusClient.CreateSender(eventBusConfiguration.TopicName);
+                var serviceBusSender = serviceBusClient.CreateSender(eventBusConfiguration.QueueName);
 
                 return serviceBusSender;
             });
@@ -46,8 +46,7 @@ namespace CartingService.Api.Setup
             services.AddSingleton(implementationFactory =>
             {
                 var serviceBusClient = implementationFactory.GetRequiredService<ServiceBusClient>();
-                var serviceBusReceiver = serviceBusClient.CreateProcessor(eventBusConfiguration.TopicName, 
-                                                                          eventBusConfiguration.Subscription,
+                var serviceBusReceiver = serviceBusClient.CreateProcessor(eventBusConfiguration.QueueName,                                                                           
                                                                           new ServiceBusProcessorOptions
                                                                           {
                                                                               AutoCompleteMessages = false
@@ -60,14 +59,15 @@ namespace CartingService.Api.Setup
 
             var serviceProvider = services.BuildServiceProvider();
             var azureServiceBusEventBus = serviceProvider.GetRequiredService<IEventBus>();
-            
-            azureServiceBusEventBus.SetupAsync(false)
+
+            azureServiceBusEventBus.SubscribeAsync<ProductChangedIntegrationEvent, IIntegrationEventHandler<ProductChangedIntegrationEvent>>(true)
+                                   .GetAwaiter()
+                                   .GetResult();
+
+            azureServiceBusEventBus.SetupAsync(true)
                                    .GetAwaiter()
                                    .GetResult();            
 
-            azureServiceBusEventBus.SubscribeAsync<ProductChangedIntegrationEvent,IIntegrationEventHandler<ProductChangedIntegrationEvent>>(false)
-                                   .GetAwaiter()
-                                   .GetResult();
             return services;      
         }
     }
