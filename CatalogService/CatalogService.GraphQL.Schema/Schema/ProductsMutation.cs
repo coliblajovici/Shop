@@ -1,9 +1,7 @@
-﻿using CatalogService.Application;
-using CatalogService.Application.Common.Interfaces;
+﻿using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
 using GraphQL;
 using GraphQL.Types;
-using System;
 using CatalogService.GraphQLSchema.Models;
 
 namespace CatalogService.GraphQLSchema.Schema
@@ -20,7 +18,7 @@ namespace CatalogService.GraphQLSchema.Schema
                 resolve: context =>
                 {
                     var categoryInput = context.GetArgument<CategoryInput>("category");
-                    var category = new Category(categoryInput.Name, categoryInput.ImageUrl);
+                    var category = new Category(categoryInput.Name, categoryInput.ImageUrl, categoryInput.ParentCategoryId);
                     return categoryService.Add(category);
                 }
             );
@@ -55,7 +53,7 @@ namespace CatalogService.GraphQLSchema.Schema
 
                  return categoryId;
              }
-         );
+            );
 
             Field<ProductType>(
                   "addProduct",
@@ -91,7 +89,7 @@ namespace CatalogService.GraphQLSchema.Schema
                  }
              );
 
-            Field<IntGraphType>(
+             Field<IntGraphType>(
                 "deleteProduct",
                  arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "productId" }),
                  resolve: context =>

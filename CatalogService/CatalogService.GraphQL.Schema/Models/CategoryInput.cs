@@ -10,7 +10,7 @@ namespace CatalogService.GraphQLSchema.Models
     {
         public string Name { get; set; }
         public string ImageUrl { get; set; }
-        //  public int? ParentCategoryId { get; set; }
+        public int? ParentCategoryId { get; set; }
     }
 }
 

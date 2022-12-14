@@ -9,11 +9,12 @@ namespace CatalogService.GraphQLSchema.Schema
         {
             Field(p => p.Id);
             Field(p => p.Name);
-            Field(p => p.ImageUrl);
+            Field(p => p.ImageUrl, nullable: true);
             Field(p => p.Price);
             Field(p => p.Amount);
             Field(p => p.Description);
             Field(p => p.CategoryId);
+            Field<Category>(p => p.Category, nullable: true);
         }
     }
 }

@@ -27,10 +27,9 @@ namespace CatalogService.Application.IntegrationTests
         [Test]
         public void ShouldCreateCategory()
         {
-            var category1 = new Category("Phones", @"https:\\test.com");
-            var category2 = new Category("Cosmetics", null);
-            var category3 = new Category("UsedPhones", @"https:\\test.com");
-            category3.UpdateParentCategory(category1); 
+            var category1 = new Category("Phones", @"https:\\test.com",null);
+            var category2 = new Category("Cosmetics", null,1);
+            var category3 = new Category("UsedPhones", @"https:\\test.com",1);            
 
             _categoryService.Add(category1);
             _categoryService.Add(category2);

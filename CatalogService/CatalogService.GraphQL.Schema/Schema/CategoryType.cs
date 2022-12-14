@@ -9,7 +9,8 @@ namespace CatalogService.GraphQLSchema.Schema
         {
             Field(c => c.Id);
             Field(c => c.Name);
-            Field(c => c.ImageUrl);
+            Field(c => c.ImageUrl, nullable: true);
+            Field<Category>(c => c.ParentCategory, nullable: true);
         }
     }
 }

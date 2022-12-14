@@ -1,7 +1,7 @@
 ﻿using GraphQL.Types;
 using GraphQL.Instrumentation;
 using System;
-using GraphQLParser.AST;
+using CatalogService.Domain.Entities;
 
 namespace CatalogService.GraphQLSchema.Schema
 {
@@ -9,6 +9,8 @@ namespace CatalogService.GraphQLSchema.Schema
     {
         public ProductsSchema(IServiceProvider provider) : base(provider)
         {
+            RegisterTypeMapping(typeof(Category), typeof(CategoryType));
+
             Query = (ProductsQuery)provider.GetService(typeof(ProductsQuery)) ?? throw new InvalidOperationException();
 
             Mutation = (ProductMutation)provider.GetService(typeof(ProductMutation)) ?? throw new InvalidOperationException();

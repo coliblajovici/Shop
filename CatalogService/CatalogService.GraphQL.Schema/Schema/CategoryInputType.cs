@@ -9,7 +9,7 @@ namespace CatalogService.GraphQLSchema.Schema
             Name = "CategoryInput";
             Field<NonNullGraphType<StringGraphType>>("name");
             Field<NonNullGraphType<StringGraphType>>("imageurl");
-            //   Field<NonNullGraphType<IntGraphType>>("parentcategoryid");
+            Field<NonNullGraphType<IntGraphType>>("parentcategoryid");
         }
     }
 }
