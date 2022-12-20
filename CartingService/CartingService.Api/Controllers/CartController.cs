@@ -56,9 +56,9 @@ namespace CatalogService.Api.Controllers
             return Ok(cart);
         }
 
-        // <summary>
+        /// <summary>
         /// Returns the cart info by the unique cart key
-        /// </summary>        
+        /// </summary>           
         /// <response code="200">The cart was found</response>
         /// <response code="404">The cart was not found</response>
         /// <response code="500">A server fault occurred</response>

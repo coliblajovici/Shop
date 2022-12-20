@@ -1,7 +1,6 @@
 using CatalogService.Application.Common.Exceptions;
 using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
-using CatalogService.Domain.Exceptions;
 using CatalogService.Domain.Interfaces;
 using CatalogService.Infrastructure.Data;
 using FluentAssertions;
@@ -29,7 +28,7 @@ namespace CatalogService.Application.IntegrationTests
             _categoryRepository = new CategoryRepository(_appDbContext);
 
             _eventBusMock = new Mock<IEventBus>();
-            _productService = new ProductService(_productRepository,_categoryRepository, _eventBusMock.Object);
+            _productService = new ProductService(_productRepository, _categoryRepository);//, _eventBusMock.Object);
 
             SetupDB();
         }         
@@ -137,9 +136,8 @@ namespace CatalogService.Application.IntegrationTests
             _appDbContext.Database.EnsureCreated();
 
             var category1 = new Category("Phones", @"https:\\test.com");
-            var category2 = new Category("Cosmetics", null);
-            var category3 = new Category("UsedPhones", @"https:\\test.com");
-            category3.UpdateParentCategory(category1);
+            var category2 = new Category("Cosmetics", null,1);
+            var category3 = new Category("UsedPhones", @"https:\\test.com",2);            
 
             _appDbContext.Categories.Add(category1);
             _appDbContext.Categories.Add(category2);
