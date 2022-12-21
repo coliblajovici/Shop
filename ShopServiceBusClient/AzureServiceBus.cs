@@ -57,6 +57,7 @@ namespace ShopServiceBusClient
             };
 
             await _serviceBusSender.SendMessageAsync(message);
+            _logger.LogInformation("Sending message {message}", jsonMessage);
         }
 
         public async Task SubscribeAsync<T, TH>(bool subscribeToQueueMessages)
