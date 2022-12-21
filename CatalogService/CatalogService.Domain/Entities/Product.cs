@@ -33,5 +33,10 @@ namespace CatalogService.Domain.Entities
             Amount = amount;
         }
 
+        public override string ToString()
+        {
+            return $"Name: {Name} - Id: {Id} - ImageUrl: {ImageUrl} - CategoryId: {CategoryId} Amount: {Amount} Price: {Price}";
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 using CartingService.Application.Interfaces;
 using CartingService.Application.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace CatalogService.Api.Controllers
 {
@@ -50,6 +51,7 @@ namespace CatalogService.Api.Controllers
             
             if (cart == null)
             {
+                _logger.LogWarning($"Cart with Id {cartId} cannot be found.");
                 return NotFound();
             }
             
@@ -73,6 +75,7 @@ namespace CatalogService.Api.Controllers
 
             if (cart == null)
             {
+                _logger.LogWarning($"Cart with Id {cartId} cannot be found.");
                 return NotFound();
             }         
 
@@ -119,6 +122,7 @@ namespace CatalogService.Api.Controllers
 
             if (cart == null)
             {
+                _logger.LogWarning($"Cart with Id {cartId} cannot be found.");
                 return NotFound();
             }
 

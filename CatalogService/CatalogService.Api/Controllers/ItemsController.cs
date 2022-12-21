@@ -93,7 +93,7 @@ namespace CatalogService.Api.Controllers
             var product = new Product(productDto.Name, productDto.Description, productDto.ImageUrl, productDto.CategoryId, productDto.Price, productDto.Amount);
 
             var createdProduct = _productService.Add(product);
-            _logger.LogInformation($"Added item with id {createdProduct.Id} ({createdProduct.Name},{createdProduct.Description},{createdProduct.Price}).");
+            _logger.LogInformation($"Added item {product}");
 
             return CreatedAtAction(
               actionName: nameof(GetItemById),
@@ -116,7 +116,7 @@ namespace CatalogService.Api.Controllers
         public IActionResult DeleteItem([FromRoute] int itemId)
         {
             _productService.Delete(itemId);
-            _logger.LogInformation($"Delete item with id {itemId}.");
+            _logger.LogInformation($"Deleted item with id {itemId}.");
 
             return NoContent();
         }
@@ -146,7 +146,7 @@ namespace CatalogService.Api.Controllers
             product.SetAmount(productDto.Amount);
             
             _productService.Update(product);
-            _logger.LogInformation($"Update item with id {itemId} ({product.Name}, {product.Description}, {product.ImageUrl}).");
+            _logger.LogInformation($"Updated item {product}.");
 
             return NoContent();
         }

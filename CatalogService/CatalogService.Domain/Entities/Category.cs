@@ -35,5 +35,10 @@
         {
             ImageUrl = imageUrl;
         }
+
+        public override string ToString()
+        {
+            return $"Name: {Name} - Id: {Id} - ImageUrl: {ImageUrl} - ParentCategoryId: {ParentCategoryId} ";
+        }
     }
 }
