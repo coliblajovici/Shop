@@ -1,11 +1,9 @@
-using System.Threading.Tasks;
 using CatalogService.Application;
 using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Interfaces;
 using CatalogService.GraphQLSchema.Schema;
 using CatalogService.Infrastructure.Data;
 using GraphQL;
-using GraphQL.DataLoader;
 using GraphQL.MicrosoftDI;
 using GraphQL.Server;
 using GraphQL.SystemTextJson;
@@ -34,9 +32,6 @@ namespace DotnetGraphQL
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddInfrastructureServices(Configuration);
-            //services.AddApplicationServices();
-
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<IProductRepository, ProductRepository>();
 
@@ -45,8 +40,6 @@ namespace DotnetGraphQL
 
             services.AddSingleton<ICategoryService, CategoryService>();
             services.AddSingleton<IProductService, ProductService>();
-
-            //services.AddSingleton<CategoryType>();
 
             services.AddGraphQL(b => b
                              .AddHttpMiddleware<ISchema>()

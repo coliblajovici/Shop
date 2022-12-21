@@ -40,7 +40,7 @@ namespace ShopServiceBusClient
         private readonly Dictionary<string, List<SubscriptionInfo>> _handlers;
         private readonly List<Type> _eventTypes;
 
-        public event EventHandler<string> OnEventRemoved;
+        public event EventHandler<string>? OnEventRemoved;
 
         public InMemoryEventBusSubscriptionsManager()
         {

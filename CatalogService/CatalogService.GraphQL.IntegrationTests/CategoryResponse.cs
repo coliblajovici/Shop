@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CatalogService.Domain.Entities;
-using FluentAssertions.Equivalency;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CatalogService.GraphQL.IntegrationTests
 {
@@ -15,7 +8,7 @@ namespace CatalogService.GraphQL.IntegrationTests
         [JsonProperty("id")]
         public int Id { get; set; }
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [JsonProperty("imageUrl")]
         public string? ImageUrl { get; set; }
         [JsonProperty("parentCategoryId")]
@@ -24,16 +17,16 @@ namespace CatalogService.GraphQL.IntegrationTests
     }
     public class CategoryQueryResponseType
     {
-        public CategoryResponse[] Categories { get; set; }
+        public CategoryResponse[]? Categories { get; set; }
     }
 
     public class AddCategoryResponseType
     {
-        public CategoryResponse AddCategory { get; set; }
+        public CategoryResponse? AddCategory { get; set; }
     }
 
     public class UpdateCategoryResponseType
     {
-        public CategoryResponse UpdateCategory { get; set; }
+        public CategoryResponse? UpdateCategory { get; set; }
     }
 }

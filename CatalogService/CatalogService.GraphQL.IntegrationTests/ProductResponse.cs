@@ -14,13 +14,13 @@ namespace CatalogService.GraphQL.IntegrationTests
         [JsonProperty("id")]
         public int Id { get; set; }
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
         [JsonProperty("imageUrl")]
         public string? ImageUrl { get; set; }
         [JsonProperty("category")]
-        public CategoryResponse Category { get; set; }
+        public CategoryResponse? Category { get; set; }
         [JsonProperty("categoryId")]
         public int CategoryId { get; set; }
         [JsonProperty("price")]
@@ -31,16 +31,16 @@ namespace CatalogService.GraphQL.IntegrationTests
 
     public class ProductQueryResponseType
     {
-        public ProductResponse[] Products { get; set; }
+        public ProductResponse[]? Products { get; set; }
     }
 
     public class AddProductResponseType
     {
-        public ProductResponse AddProduct { get; set; }
+        public ProductResponse? AddProduct { get; set; }
     }
 
     public class UpdateProductResponseType
     {
-        public ProductResponse UpdateProduct { get; set; }
+        public ProductResponse? UpdateProduct { get; set; }
     }
 }

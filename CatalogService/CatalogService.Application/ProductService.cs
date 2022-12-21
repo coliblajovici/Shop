@@ -53,15 +53,8 @@ namespace CatalogService.Application
 
             var productChanged = new ProductChangedIntegrationEvent(product.Id, product.Name, product.Description, product.ImageUrl, product.CategoryId, product.Price, product.Amount);
 
-            try
-            {
-                _productRepository.Update(product);
-                await _eventBus.PublishAsync(productChanged);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            _productRepository.Update(product);
+            await _eventBus.PublishAsync(productChanged);
         }
 
         public void Delete(int productId)
