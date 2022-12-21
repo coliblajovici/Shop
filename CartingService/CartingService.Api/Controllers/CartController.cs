@@ -1,7 +1,6 @@
 using CartingService.Application.Interfaces;
 using CartingService.Application.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace CatalogService.Api.Controllers
 {

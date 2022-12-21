@@ -31,6 +31,7 @@ namespace CartingService.Api.Events
                 }
 
                 await _service.UpdateCartItemAsync(cartItem);
+                _logger.LogInformation($"CartItem with Id {cartItem.Id} and Name {cartItem.Name} has been updated ");
 
             }
             catch (Exception ex)
