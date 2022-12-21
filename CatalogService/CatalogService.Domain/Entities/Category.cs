@@ -31,7 +31,7 @@
             Name = name;
         }
 
-        public void UpdateImageUrl(string imageUrl)
+        public void UpdateImageUrl(string? imageUrl)
         {
             ImageUrl = imageUrl;
         }

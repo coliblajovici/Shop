@@ -138,8 +138,11 @@ namespace CatalogService.Api.Controllers
                 return NotFound();
             }
 
-            category.UpdateName(categoryDto.Name);
-            category.UpdateImageUrl(categoryDto.ImageUrl);
+            if (categoryDto != null)
+            {
+                category.UpdateName(categoryDto.Name);
+                category.UpdateImageUrl(categoryDto.ImageUrl);
+            }
 
             _categoryService.Update(category);
             _logger.LogInformation($"Updated category {category}.");

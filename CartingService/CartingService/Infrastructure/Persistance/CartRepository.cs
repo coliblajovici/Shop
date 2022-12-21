@@ -8,7 +8,7 @@ namespace CartingService.Infrastructure.Persistance
     public class CartRepository : ICartRepository
     {
 
-        private LiteDatabase _liteDb;
+        private readonly LiteDatabase _liteDb;
 
         public CartRepository(LiteDatabase liteDb)
         {

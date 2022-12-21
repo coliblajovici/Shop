@@ -1,7 +1,6 @@
 using CatalogService.Api.Models;
 using CatalogService.Api.Models.Interfaces;
 using CatalogService.Api.Setup;
-using CatalogService.Application.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,18 +9,12 @@ builder.Services.AddApplicationInsightsTelemetry(opt => { opt.EnableAdaptiveSamp
 
 // Add services to the container.
 builder.Services.ConfigureUrlHelper();
-//builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddScoped<IItemResourceBuilder, ItemResourceBuilder>();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.ConfigureServiceBus(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
-
-builder.Services.AddMvc(options =>
-{
-    options.Filters.Add<CustomExceptionFilter>();
-});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

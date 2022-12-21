@@ -9,9 +9,9 @@ namespace CatalogService.Application
 {
     public class ProductService : IProductService
     {
-        private IProductRepository _productRepository;
-        private ICategoryRepository _categoryRepository;
-        private IEventBus _eventBus;
+        private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IEventBus _eventBus;
 
         public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IEventBus eventBus)
         {

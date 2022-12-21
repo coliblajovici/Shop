@@ -53,6 +53,7 @@ namespace CatalogService.Api.UnitTests
             var controller = new CategoriesController(categoryServiceStub.Object, loggerStub.Object);
 
             var result = controller.GetCategoryList();
+        
             var categoryList = (result as OkObjectResult).Value;
             categoryList.Should().BeEquivalentTo(expectedCategories);
         }
@@ -109,8 +110,10 @@ namespace CatalogService.Api.UnitTests
             var expectedCategory = CreateCategory();
             var existingItemId = expectedCategory.Id;
             var categoryServiceStub = new Mock<ICategoryService>();
+#pragma warning disable CS8604 // Possible null reference argument.
             categoryServiceStub.Setup(service => service.GetCategory(It.IsAny<int>()))
                 .Returns(null as Category);
+#pragma warning restore CS8604 // Possible null reference argument.
 
             var controller = new CategoriesController(categoryServiceStub.Object, loggerStub.Object);
 

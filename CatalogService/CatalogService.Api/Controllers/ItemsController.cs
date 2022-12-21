@@ -1,6 +1,5 @@
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using System.Web.Http.Filters;
 using CatalogService.Api.Dto;
 using CatalogService.Api.Models;
 using CatalogService.Api.Models.Interfaces;
@@ -23,17 +22,12 @@ namespace CatalogService.Api.Controllers
         private readonly ILogger<ItemsController> _logger;
         private readonly IProductService _productService;
         private readonly IItemResourceBuilder _itemResourceBuilder;
-        private readonly IHttpContextAccessor _contextAccessor;
 
-        private string _currentPrincipalId = string.Empty;
-
-
-        public ItemsController(IProductService productService, ILogger<ItemsController> logger, IItemResourceBuilder itemResourceBuilder, IHttpContextAccessor contextAccessor)
+        public ItemsController(IProductService productService, ILogger<ItemsController> logger, IItemResourceBuilder itemResourceBuilder)
         {
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _itemResourceBuilder = itemResourceBuilder ?? throw new ArgumentNullException(nameof(itemResourceBuilder));
-            _contextAccessor = contextAccessor;
         }
 
         /// <summary>
@@ -149,23 +143,6 @@ namespace CatalogService.Api.Controllers
             _logger.LogInformation($"Updated item {product}.");
 
             return NoContent();
-        }
-
-        /// <summary>
-        /// returns the current claimsPrincipal (user/Client app) dehydrated from the Access token
-        /// </summary>
-        /// <returns></returns>
-        private ClaimsPrincipal GetCurrentClaimsPrincipal()
-        {
-            // Irrespective of whether a user signs in or not, the AspNet security middle-ware dehydrates the claims in the
-            // HttpContext.User.Claims collection
-
-            if (_contextAccessor.HttpContext != null && _contextAccessor.HttpContext.User != null)
-            {
-                return _contextAccessor.HttpContext.User;
-            }
-
-            return null;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace CatalogService.Api.Models
         public int Id { get; set; }
 
         [DataMember(Order = 2)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [DataMember(Order = 3)]
         public string Description { get; set; } = string.Empty;
@@ -57,8 +57,15 @@ namespace CatalogService.Api.Models
 
         public ItemResource AddLink(string method, string relation, string routeName, object? values)
         {
+            var href = _urlHelper.Link(routeName, values);
+
+            if (href == null)
+            {
+                href = string.Empty; 
+            }
+
             var resource = new ResourceLink(
-                href: _urlHelper.Link(routeName, values),
+                href: href,
                 rel: relation,
                 method: method);
 

@@ -1,8 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Logging;
-using ShopServiceBusClient;
 
 namespace CatalogService.Api.Setup
 {
