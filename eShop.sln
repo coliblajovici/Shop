@@ -41,7 +41,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatalogService.Domain.UnitT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatalogService.GraphQLSchema", "CatalogService\CatalogService.GraphQL.Schema\CatalogService.GraphQLSchema.csproj", "{FEC454AD-A3F0-4571-970B-2644AF3D015E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogService.GraphQL.IntegrationTests", "CatalogService\CatalogService.GraphQL.IntegrationTests\CatalogService.GraphQL.IntegrationTests.csproj", "{2B1FCDF3-FC7F-4B83-B7D1-1BBFBA9067B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatalogService.GraphQL.IntegrationTests", "CatalogService\CatalogService.GraphQL.IntegrationTests\CatalogService.GraphQL.IntegrationTests.csproj", "{2B1FCDF3-FC7F-4B83-B7D1-1BBFBA9067B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4270BE4D-B09A-47FB-A5D8-70761C351715}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
