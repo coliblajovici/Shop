@@ -1,7 +1,7 @@
-﻿using CartingService.Domain.Entities;
+﻿using System.Xml;
+using CartingService.Domain.Entities;
 using CartingService.Persistance.Exceptions;
 using LiteDB;
-using System.Xml;
 
 namespace CartingService.Infrastructure.Persistance
 {
@@ -18,8 +18,8 @@ namespace CartingService.Infrastructure.Persistance
         public Cart GetCart(Guid cartId)
         {
             ILiteCollection<Cart> collection = _liteDb.GetCollection<Cart>("Carts");
-            
-            return collection.FindById(cartId);            
+
+            return collection.FindById(cartId);
         }
 
         public IList<CartItem> GetCartItems(Guid cartId)
@@ -69,7 +69,7 @@ namespace CartingService.Infrastructure.Persistance
 
         public async Task UpdateCartItemAsync(CartItem cartItem)
         {
-            var collection = _liteDb.GetCollection<Cart>("Carts");            
+            var collection = _liteDb.GetCollection<Cart>("Carts");
             foreach (var cart in collection.FindAll())
             {
                 var item = cart.CartItems.Find(p => p.Id == cartItem.Id);
@@ -90,7 +90,7 @@ namespace CartingService.Infrastructure.Persistance
                     }
                     collection.Update(cart);
                 }
-            }            
+            }
         }
 
         public void Dispose()
@@ -110,6 +110,6 @@ namespace CartingService.Infrastructure.Persistance
             {
                 _liteDb.Dispose();
             }
-        }       
+        }
     }
 }

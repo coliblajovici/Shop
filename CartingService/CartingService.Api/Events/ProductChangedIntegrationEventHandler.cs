@@ -9,11 +9,11 @@ namespace CartingService.Api.Events
 
         private readonly ILogger<ProductChangedIntegrationEventHandler> _logger;
         private readonly ICartService _service;
-      
+
         public ProductChangedIntegrationEventHandler(ILogger<ProductChangedIntegrationEventHandler> logger, ICartService service)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _service = service ?? throw new ArgumentNullException(nameof(service));            
+            _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
         async Task IIntegrationEventHandler<ProductChangedIntegrationEvent>.HandleAsync(ProductChangedIntegrationEvent @event)

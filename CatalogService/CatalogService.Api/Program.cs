@@ -1,6 +1,6 @@
 using CatalogService.Api.Models;
-using CatalogService.Api.Setup;
 using CatalogService.Api.Models.Interfaces;
+using CatalogService.Api.Setup;
 using CatalogService.Application.Filters;
 
 var builder = WebApplication.CreateBuilder(args);

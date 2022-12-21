@@ -1,5 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
-using System.Reflection;
+﻿using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 namespace CartingService.Api.Setup
 {
@@ -14,7 +14,7 @@ namespace CartingService.Api.Setup
                 {
                     Version = "v1",
                     Title = "Carting Service API v1.0",
-                    Description = "An ASP.NET Core Web API for Cart Items",                    
+                    Description = "An ASP.NET Core Web API for Cart Items",
                 });
 
                 options.SwaggerDoc("v2", new OpenApiInfo

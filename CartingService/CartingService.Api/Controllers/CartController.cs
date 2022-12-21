@@ -7,18 +7,18 @@ namespace CatalogService.Api.Controllers
     [ApiController]
     [Route("api/v{version:apiVersion}/cart")]
     [ApiVersion("1.0")]
-    [ApiVersion("2.0")]    
+    [ApiVersion("2.0")]
     [Produces("application/json", "application/xml")]
     [Consumes("application/json", "application/xml")]
     public class CartController : ControllerBase
-    {       
+    {
         private readonly ILogger<CartController> _logger;
-        private readonly ICartService _cartService;        
+        private readonly ICartService _cartService;
 
         public CartController(ICartService cartService, ILogger<CartController> logger)
         {
             _cartService = cartService ?? throw new ArgumentNullException(nameof(cartService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));            
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>
@@ -44,16 +44,16 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetCartInfo([FromRoute]Guid cartId)
+        public IActionResult GetCartInfo([FromRoute] Guid cartId)
         {
             var cart = _cartService.GetCart(cartId);
-            
+
             if (cart == null)
             {
                 _logger.LogWarning($"Cart with Id {cartId} cannot be found.");
                 return NotFound();
             }
-            
+
             return Ok(cart);
         }
 
@@ -76,7 +76,7 @@ namespace CatalogService.Api.Controllers
             {
                 _logger.LogWarning($"Cart with Id {cartId} cannot be found.");
                 return NotFound();
-            }         
+            }
 
             return Ok(cart.CartItems);
         }
@@ -87,22 +87,22 @@ namespace CatalogService.Api.Controllers
         /// <response code="200">The item was created successfully</response>
         /// <response code="400">The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications</response>
         /// <response code="500">A server fault occurred</response>
-        [HttpPost("{cartId:Guid}/items")]        
+        [HttpPost("{cartId:Guid}/items")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult AddItem([FromRoute]Guid cartId, [FromBody] CartItem cartItem)
+        public IActionResult AddItem([FromRoute] Guid cartId, [FromBody] CartItem cartItem)
         {
             var item = new CartingService.Domain.Entities.CartItem();
             item.Id = cartItem.Id;
             item.Name = cartItem.Name;
-            item.Quantity = cartItem.Quantity;           
-            item.Price = cartItem.Price;            
-            
-             _cartService.AddItem(cartId, item);
+            item.Quantity = cartItem.Quantity;
+            item.Price = cartItem.Price;
+
+            _cartService.AddItem(cartId, item);
             _logger.LogInformation($"Added item {item.Id}, {item.Name} to cart with Id {cartId}.");
 
-            return Ok();            
+            return Ok();
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult RemoveItem([FromRoute]Guid cartId, [FromRoute] int cartItemId)
+        public IActionResult RemoveItem([FromRoute] Guid cartId, [FromRoute] int cartItemId)
         {
             var cart = _cartService.GetCart(cartId);
 
@@ -129,6 +129,6 @@ namespace CatalogService.Api.Controllers
             _logger.LogInformation($"Removed item {cartItemId} from cart with Id {cartId}.");
 
             return Ok();
-        }  
+        }
     }
 }

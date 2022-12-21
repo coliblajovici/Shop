@@ -8,6 +8,6 @@ namespace CatalogService.Application.Common.Interfaces
         Category GetCategory(int categoryId);
         Category Add(Category category);
         void Update(Category category);
-        void Delete(int categoryId);        
+        void Delete(int categoryId);
     }
 }

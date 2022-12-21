@@ -12,7 +12,7 @@ namespace CatalogService.Domain.UnitTests
 
         [Test]
         public void ShouldThrowInvalidAmountWhenCreatingProduct()
-        {            
+        {
             Assert.Throws(Is.TypeOf<InvalidAmountException>(),
                 delegate { var product = new Product("IPhone", "very nice phone", @"https:\\test.com", 1000, 100, -100); });
         }

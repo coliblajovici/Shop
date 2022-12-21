@@ -60,26 +60,26 @@ namespace CartingService.Api.UnitTests
         {
             var cartItemToCreate = new Application.Models.CartItem()
             {
-                Name = "Test Name",               
+                Name = "Test Name",
             };
 
-            var expectedCart = CreateCart();            
+            var expectedCart = CreateCart();
             var controller = new CartController(cartService.Object, loggerStub.Object);
             var result = controller.AddItem(Guid.NewGuid(), cartItemToCreate);
             result.Should().BeOfType<OkResult>();
         }
-      
+
         [Test]
         public void DeleteCartItem_WithUnexistingCart_ReturnNotFound()
         {
             var expectedCart = CreateCart();
-            var existingItemId = expectedCart.Id;            
+            var existingItemId = expectedCart.Id;
             cartService.Setup(service => service.GetCart(It.IsAny<Guid>()))
                 .Returns(null as Cart);
 
             var controller = new CartController(cartService.Object, loggerStub.Object);
 
-            var result = controller.RemoveItem(existingItemId,1);
+            var result = controller.RemoveItem(existingItemId, 1);
             result.Should().BeOfType<NotFoundResult>();
         }
 

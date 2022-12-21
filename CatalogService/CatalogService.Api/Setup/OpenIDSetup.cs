@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Logging;
 using ShopServiceBusClient;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace CatalogService.Api.Setup
 {
@@ -18,6 +18,6 @@ namespace CatalogService.Api.Setup
             IdentityModelEventSource.ShowPII = true;
 
             return services;
-        }         
+        }
     }
 }

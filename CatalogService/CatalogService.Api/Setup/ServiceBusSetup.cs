@@ -1,8 +1,8 @@
-﻿using Azure.Messaging.ServiceBus.Administration;
-using Azure.Messaging.ServiceBus;
+﻿using Azure.Messaging.ServiceBus;
+using Azure.Messaging.ServiceBus.Administration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using ShopServiceBusClient;
-using Microsoft.Extensions.Configuration;
 
 namespace CatalogService.Api.Setup
 {
@@ -27,7 +27,7 @@ namespace CatalogService.Api.Setup
             services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
 
             services.AddSingleton(implementationFactory =>
-            {                
+            {
                 var serviceBusClient = new ServiceBusClient(eventBusConfiguration.ConnectionString);
                 return serviceBusClient;
             });
@@ -41,7 +41,7 @@ namespace CatalogService.Api.Setup
             });
 
             services.AddSingleton(implementationFactory =>
-            {                
+            {
                 var serviceBusAdministrationClient = new ServiceBusAdministrationClient(eventBusConfiguration
                                                                                         .ConnectionString);
                 return serviceBusAdministrationClient;
@@ -50,7 +50,7 @@ namespace CatalogService.Api.Setup
             services.AddSingleton(implementationFactory =>
             {
                 var serviceBusClient = implementationFactory.GetRequiredService<ServiceBusClient>();
-                var serviceBusReceiver = serviceBusClient.CreateProcessor(eventBusConfiguration.QueueName,                                                                          
+                var serviceBusReceiver = serviceBusClient.CreateProcessor(eventBusConfiguration.QueueName,
                                                                           new ServiceBusProcessorOptions
                                                                           {
                                                                               AutoCompleteMessages = false
@@ -61,7 +61,7 @@ namespace CatalogService.Api.Setup
 
             services.AddSingleton<IEventBus, AzureServiceBus>();
 
-            return services;        
+            return services;
         }
     }
 }

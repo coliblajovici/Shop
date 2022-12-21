@@ -1,11 +1,11 @@
+using CartingService.Application;
+using CartingService.Application.Exceptions;
+using CartingService.Domain.Entities;
+using CartingService.Infrastructure.Persistance;
+using CartingService.Persistance.Exceptions;
+using FluentAssertions;
 using LiteDB;
 using Microsoft.Extensions.Configuration;
-using FluentAssertions;
-using CartingService.Persistance.Exceptions;
-using CartingService.Infrastructure.Persistance;
-using CartingService.Application;
-using CartingService.Domain.Entities;
-using CartingService.Application.Exceptions;
 
 namespace CartingService.IntegrationTests.Application
 {
@@ -76,12 +76,12 @@ namespace CartingService.IntegrationTests.Application
                 Quantity = 1
             };
 
-            Guid cartId = new Guid("e0e5a992-4b49-4f1b-9073-54e0732d2631");            
+            Guid cartId = new Guid("e0e5a992-4b49-4f1b-9073-54e0732d2631");
             FluentActions.Invoking(() =>
                  _service.AddItem(cartId, cartItem)).Should().Throw<InvalidItemException>()
                .WithMessage("Invalid Item Exception");
         }
-    
+
 
         [Test]
         public void ShouldRemoveCartItem()

@@ -1,7 +1,7 @@
-﻿using GraphQL.Types;
-using GraphQL.Instrumentation;
-using System;
+﻿using System;
 using CatalogService.Domain.Entities;
+using GraphQL.Instrumentation;
+using GraphQL.Types;
 
 namespace CatalogService.GraphQLSchema.Schema
 {

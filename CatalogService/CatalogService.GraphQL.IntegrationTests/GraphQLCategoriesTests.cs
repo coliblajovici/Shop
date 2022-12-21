@@ -1,30 +1,30 @@
+using CatalogService.Application;
+using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
+using CatalogService.Domain.Interfaces;
 using CatalogService.GraphQLSchema.Models;
 using CatalogService.GraphQLSchema.Schema;
+using CatalogService.Infrastructure.Data;
 using DotnetGraphQL;
 using FluentAssertions;
 using GraphQL;
+using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
 using GraphQL.Validation;
 using Microsoft.AspNetCore.Mvc.Testing;
-using NUnit.Framework.Constraints;
-using GraphQL.Client.Abstractions;
-using CatalogService.Infrastructure.Data;
-using CatalogService.Application;
-using CatalogService.Domain.Interfaces;
-using ShopServiceBusClient;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using CatalogService.Application.Common.Interfaces;
+using Microsoft.Extensions.Options;
+using NUnit.Framework.Constraints;
+using ShopServiceBusClient;
 
 namespace CatalogService.GraphQL.IntegrationTests
 {
     public class GraphQLCategoriesTests
     {
         private WebApplicationFactory<Startup> _factory;
-        private HttpClient _client;        
+        private HttpClient _client;
 
         [SetUp]
         public void Setup()
@@ -96,7 +96,7 @@ namespace CatalogService.GraphQL.IntegrationTests
                 }",
               new
               {
-                  id= 3,
+                  id = 3,
                   category = new
                   {
                       name = "Test Update GraphQL",

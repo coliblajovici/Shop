@@ -14,7 +14,7 @@ namespace CartingService.Persistance.Exceptions
         }
 
         public CartNotFoundException(Guid cartId)
-            :  base($"Cart with Id {cartId} was not found.")
+            : base($"Cart with Id {cartId} was not found.")
         {
         }
     }

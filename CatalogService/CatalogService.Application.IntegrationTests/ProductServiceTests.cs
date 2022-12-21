@@ -20,7 +20,7 @@ namespace CatalogService.Application.IntegrationTests
         private readonly Mock<IEventBus> _eventBusMock;
 
         public ProductServiceTests()
-        {          
+        {
             var options = CreateNewContextOptions();
             _appDbContext = new AppDbContext(options);
 
@@ -28,17 +28,17 @@ namespace CatalogService.Application.IntegrationTests
             _categoryRepository = new CategoryRepository(_appDbContext);
 
             _eventBusMock = new Mock<IEventBus>();
-            _productService = new ProductService(_productRepository, _categoryRepository);//, _eventBusMock.Object);
+            _productService = new ProductService(_productRepository, _categoryRepository, _eventBusMock.Object);
 
             SetupDB();
-        }         
+        }
 
         [Test]
         public void ShouldCreateProduct()
         {
-            var product1 = new Product("IPhone", "very nice phone", @"https:\\test.com",1, 100,1);
+            var product1 = new Product("IPhone", "very nice phone", @"https:\\test.com", 1, 100, 1);
             var product2 = new Product("IPad", "very nice iphone", null, 1, 100, 1);
-            var product3 = new Product("Lipstick", "red", @"https:\\test.com",2,299,1);            
+            var product3 = new Product("Lipstick", "red", @"https:\\test.com", 2, 299, 1);
 
             _productService.Add(product1);
             _productService.Add(product2);
@@ -52,9 +52,9 @@ namespace CatalogService.Application.IntegrationTests
         public void ShouldThrowCategoryNotFoundWhenCreatingProduct()
         {
             var product = new Product("IPhone", "very nice phone", @"https:\\test.com", 1000, 100, 1);
-                        
+
             FluentActions.Invoking(() =>
-              _productService.Add(product)).Should().Throw<NotFoundException>();            
+              _productService.Add(product)).Should().Throw<NotFoundException>();
         }
 
         [Test]
@@ -110,7 +110,7 @@ namespace CatalogService.Application.IntegrationTests
         [Test]
         public void ShouldDeleteCategory()
         {
-            _productService.Delete(2);            
+            _productService.Delete(2);
 
             var items = _productService.GetProducts();
             items.ToList().Count.Should().Be(2);
@@ -125,7 +125,7 @@ namespace CatalogService.Application.IntegrationTests
             string connectionString = configuration.GetConnectionString("DefaultConnection");
 
             var builder = new DbContextOptionsBuilder<AppDbContext>();
-            builder.UseSqlServer(connectionString);                   
+            builder.UseSqlServer(connectionString);
 
             return builder.Options;
         }
@@ -136,8 +136,8 @@ namespace CatalogService.Application.IntegrationTests
             _appDbContext.Database.EnsureCreated();
 
             var category1 = new Category("Phones", @"https:\\test.com");
-            var category2 = new Category("Cosmetics", null,1);
-            var category3 = new Category("UsedPhones", @"https:\\test.com",2);            
+            var category2 = new Category("Cosmetics", null, 1);
+            var category3 = new Category("UsedPhones", @"https:\\test.com", 2);
 
             _appDbContext.Categories.Add(category1);
             _appDbContext.Categories.Add(category2);

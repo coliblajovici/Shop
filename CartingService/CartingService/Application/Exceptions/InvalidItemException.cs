@@ -3,7 +3,7 @@
 namespace CartingService.Application.Exceptions
 {
 
- 
+
     [Serializable]
     public class InvalidItemException : Exception
     {

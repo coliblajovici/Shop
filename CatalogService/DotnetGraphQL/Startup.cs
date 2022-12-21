@@ -1,22 +1,22 @@
 using System.Threading.Tasks;
+using CatalogService.Application;
+using CatalogService.Application.Common.Interfaces;
+using CatalogService.Domain.Interfaces;
+using CatalogService.GraphQLSchema.Schema;
+using CatalogService.Infrastructure.Data;
+using GraphQL;
+using GraphQL.DataLoader;
+using GraphQL.MicrosoftDI;
+using GraphQL.Server;
+using GraphQL.SystemTextJson;
+using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
-using GraphQL;
-using GraphQL.MicrosoftDI;
-using GraphQL.SystemTextJson;
-using GraphQL.Server;
-using GraphQL.Types;
-using GraphQL.DataLoader;
-using CatalogService.Application.Common.Interfaces;
-using CatalogService.Application;
-using CatalogService.Domain.Interfaces;
-using CatalogService.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
-using CatalogService.GraphQLSchema.Schema;
 
 namespace DotnetGraphQL
 {
@@ -33,7 +33,7 @@ namespace DotnetGraphQL
         }
 
         public void ConfigureServices(IServiceCollection services)
-        {            
+        {
             //services.AddInfrastructureServices(Configuration);
             //services.AddApplicationServices();
 
@@ -50,12 +50,12 @@ namespace DotnetGraphQL
 
             services.AddGraphQL(b => b
                              .AddHttpMiddleware<ISchema>()
-                             .AddUserContextBuilder(httpContext => new GraphQLUserContext { User = httpContext.User })                             
-                             .AddWebSocketsHttpMiddleware<ProductsSchema>()                             
+                             .AddUserContextBuilder(httpContext => new GraphQLUserContext { User = httpContext.User })
+                             .AddWebSocketsHttpMiddleware<ProductsSchema>()
                              .AddSystemTextJson()
-                             .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)                             
-                             .AddSchema<ProductsSchema>()                            
-                            .AddGraphTypes(typeof(ProductsSchema).Assembly));          
+                             .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)
+                             .AddSchema<ProductsSchema>()
+                            .AddGraphTypes(typeof(ProductsSchema).Assembly));
 
             services.AddLogging(builder => builder.AddConsole());
             services.AddHttpContextAccessor();
@@ -63,11 +63,11 @@ namespace DotnetGraphQL
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if(env.IsDevelopment())
+            if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseWebSockets();           
-            app.UseGraphQLWebSockets<ProductsSchema>();          
+            app.UseWebSockets();
+            app.UseGraphQLWebSockets<ProductsSchema>();
             app.UseGraphQL<ISchema>();
             app.UseGraphQLPlayground();
         }

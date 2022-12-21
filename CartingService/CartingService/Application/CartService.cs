@@ -5,7 +5,7 @@ using CartingService.Infrastructure.Persistance;
 
 namespace CartingService.Application
 {
-    public class CartService: ICartService
+    public class CartService : ICartService
     {
         private readonly ICartRepository _cartRepository;
 

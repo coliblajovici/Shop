@@ -1,11 +1,11 @@
-﻿using Azure.Messaging.ServiceBus.Administration;
-using Azure.Messaging.ServiceBus;
-using Microsoft.Extensions.Logging;
+﻿using System.Text;
 using System.Text.Json;
-using System.Text;
+using Azure.Messaging.ServiceBus;
+using Azure.Messaging.ServiceBus.Administration;
+using Microsoft.Extensions.Logging;
 
 namespace ShopServiceBusClient
-{ 
+{
     public class AzureServiceBus : IEventBus
     {
         private readonly EventBusConfiguration _eventBusConfiguration;
@@ -122,7 +122,7 @@ namespace ShopServiceBusClient
             {
                 var subscriptions = _subscriptionManager.GetHandlersForEvent(eventName);
                 foreach (var subscription in subscriptions)
-                {                    
+                {
                     var handler = _serviceProvider.GetService(subscription.HandlerType);
                     if (handler == null) continue;
 
@@ -145,7 +145,7 @@ namespace ShopServiceBusClient
             await _serviceBusReceiver.CloseAsync();
             await _serviceBusReceiver.DisposeAsync();
             await _serviceBusSender.CloseAsync();
-            await _serviceBusSender.DisposeAsync();            
+            await _serviceBusSender.DisposeAsync();
         }
     }
 }

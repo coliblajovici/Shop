@@ -1,6 +1,6 @@
-﻿using CatalogService.Domain.Entities;
+﻿using System.Reflection;
+using CatalogService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace CatalogService.Infrastructure.Data
 {

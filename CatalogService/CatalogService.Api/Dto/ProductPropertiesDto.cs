@@ -6,7 +6,7 @@
 
         public ProductPropertiesDto()
         {
-            PropertyPairs = new Dictionary<string, string>();                    
+            PropertyPairs = new Dictionary<string, string>();
         }
     }
 }

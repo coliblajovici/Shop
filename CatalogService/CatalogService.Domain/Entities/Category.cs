@@ -11,7 +11,7 @@
         public Category(string name, string? imageUrl)
         {
             Name = name;
-            ImageUrl = imageUrl;            
+            ImageUrl = imageUrl;
         }
 
         public Category(string name, string? imageUrl, int? parentCategoryId)

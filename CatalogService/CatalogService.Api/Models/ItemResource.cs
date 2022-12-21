@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CatalogService.Api.Models
 {
-    [DataContract(Name = "Item", Namespace = "")]    
-    public sealed class ItemResource 
+    [DataContract(Name = "Item", Namespace = "")]
+    public sealed class ItemResource
     {
         private readonly IUrlHelper _urlHelper;
         private readonly List<ResourceLink> _links = new List<ResourceLink>();
@@ -16,7 +16,7 @@ namespace CatalogService.Api.Models
         }
 
         public ItemResource(IUrlHelper urlHelper, Product item)
-        {            
+        {
             if (item is null)
                 throw new ArgumentNullException(nameof(item));
 
@@ -30,7 +30,7 @@ namespace CatalogService.Api.Models
 
             _urlHelper = urlHelper;
         }
-   
+
         [DataMember(Order = 1)]
         public int Id { get; set; }
 
@@ -63,8 +63,8 @@ namespace CatalogService.Api.Models
                 method: method);
 
             _links.Add(resource);
-            
-           return this;
+
+            return this;
         }
     }
 }

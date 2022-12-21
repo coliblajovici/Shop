@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Versioning;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace CartingService.Api.Setup
 {
@@ -11,7 +11,7 @@ namespace CartingService.Api.Setup
             {
                 o.AssumeDefaultVersionWhenUnspecified = true;
                 o.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
-                o.ReportApiVersions = true;              
+                o.ReportApiVersions = true;
             });
 
             services.AddVersionedApiExplorer(setup =>

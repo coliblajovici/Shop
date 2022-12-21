@@ -1,19 +1,26 @@
 ﻿using Azure.Messaging.ServiceBus;
 using Azure.Messaging.ServiceBus.Administration;
-using CartingService.Api.Events;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using ShopServiceBusClient;
 
-namespace CartingService.Api.Setup
+namespace CatalogService.Api.Setup
 {
     internal static class ServiceBusSetup
     {
         internal static IServiceCollection ConfigureServiceBus(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IIntegrationEventHandler<ProductChangedIntegrationEvent>, ProductChangedIntegrationEventHandler>();
 
             services.Configure<EventBusConfiguration>(configuration.GetSection("ServiceBusConfig"));
+            /*  services.AddSingleton<IEventBus, AzureServiceBus>(sp =>
+              {                             
+                  var logger = sp.GetRequiredService<ILogger<AzureServiceBus>>();                
+                  string connectionString = configuration.GetConnectionString("EventBusConnection");
+
+                  return new AzureServiceBus(connectionString, logger);
+              });*/
+
 
             var eventBusConfiguration = services.BuildServiceProvider().GetRequiredService<IOptions<EventBusConfiguration>>().Value;
             services.AddSingleton<EventBusConfiguration>(eventBusConfiguration);
@@ -22,7 +29,6 @@ namespace CartingService.Api.Setup
 
             services.AddSingleton(implementationFactory =>
             {
-                //Connection string value in app settings has to be properly added (for either queue or topic with subscriptions):
                 var serviceBusClient = new ServiceBusClient(eventBusConfiguration.ConnectionString);
                 return serviceBusClient;
             });
@@ -37,7 +43,6 @@ namespace CartingService.Api.Setup
 
             services.AddSingleton(implementationFactory =>
             {
-                //Connection string value in app settings has to be properly added:
                 var serviceBusAdministrationClient = new ServiceBusAdministrationClient(eventBusConfiguration
                                                                                         .ConnectionString);
                 return serviceBusAdministrationClient;
@@ -56,17 +61,6 @@ namespace CartingService.Api.Setup
             });
 
             services.AddSingleton<IEventBus, AzureServiceBus>();
-
-            var serviceProvider = services.BuildServiceProvider();
-            var azureServiceBusEventBus = serviceProvider.GetRequiredService<IEventBus>();
-
-            azureServiceBusEventBus.SubscribeAsync<ProductChangedIntegrationEvent, IIntegrationEventHandler<ProductChangedIntegrationEvent>>(true)
-                                   .GetAwaiter()
-                                   .GetResult();
-
-            azureServiceBusEventBus.SetupAsync(true)
-                                   .GetAwaiter()
-                                   .GetResult();
 
             return services;
         }

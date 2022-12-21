@@ -1,8 +1,8 @@
 ﻿using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
+using CatalogService.GraphQLSchema.Models;
 using GraphQL;
 using GraphQL.Types;
-using CatalogService.GraphQLSchema.Models;
 
 namespace CatalogService.GraphQLSchema.Schema
 {
@@ -89,17 +89,17 @@ namespace CatalogService.GraphQLSchema.Schema
                  }
              );
 
-             Field<IntGraphType>(
-                "deleteProduct",
-                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "productId" }),
-                 resolve: context =>
-                 {
-                     int productId = context.GetArgument<int>("productId");
+            Field<IntGraphType>(
+               "deleteProduct",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "productId" }),
+                resolve: context =>
+                {
+                    int productId = context.GetArgument<int>("productId");
 
-                     productService.Delete(productId);
+                    productService.Delete(productId);
 
-                     return productId;
-                 });
+                    return productId;
+                });
         }
     }
 }

@@ -14,10 +14,10 @@ namespace CatalogService.Domain.Entities
         public int Amount { get; private set; }
 
         public Product(string name, string description, string? imageUrl, int categoryId, decimal price, int amount)
-        {            
+        {
             Name = name;
             Description = description;
-            ImageUrl = imageUrl;            
+            ImageUrl = imageUrl;
             CategoryId = categoryId;
             Price = price;
             SetAmount(amount);

@@ -1,6 +1,6 @@
 ﻿
-using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 namespace CatalogService.Api.Setup
 {
@@ -15,7 +15,7 @@ namespace CatalogService.Api.Setup
                 {
                     Version = "v1",
                     Title = "Catalog Service API",
-                    Description = "An ASP.NET Core Web API for Catalogs",                    
+                    Description = "An ASP.NET Core Web API for Catalogs",
                 });
 
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

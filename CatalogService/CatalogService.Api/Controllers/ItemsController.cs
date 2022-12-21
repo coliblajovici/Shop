@@ -1,3 +1,6 @@
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Web.Http.Filters;
 using CatalogService.Api.Dto;
 using CatalogService.Api.Models;
 using CatalogService.Api.Models.Interfaces;
@@ -8,9 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.Resource;
 using ShopServiceBusClient;
-using System.Net.Http.Headers;
-using System.Security.Claims;
-using System.Web.Http.Filters;
 
 namespace CatalogService.Api.Controllers
 {
@@ -19,7 +19,7 @@ namespace CatalogService.Api.Controllers
     [Produces("application/json", "application/xml")]
     [Consumes("application/json", "application/xml")]
     public class ItemsController : ControllerBase
-    {       
+    {
         private readonly ILogger<ItemsController> _logger;
         private readonly IProductService _productService;
         private readonly IItemResourceBuilder _itemResourceBuilder;
@@ -53,11 +53,11 @@ namespace CatalogService.Api.Controllers
         /// </summary>        
         /// <response code="200">The item was found</response>
         /// <response code="404">The item was not found</response>
-        [HttpGet("{itemId:int}", Name =nameof(GetItemById))] 
+        [HttpGet("{itemId:int}", Name = nameof(GetItemById))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ItemResource GetItemById([FromRoute]int itemId)
+        public ItemResource GetItemById([FromRoute] int itemId)
         {
             var product = _productService.GetProduct(itemId);
 
@@ -68,9 +68,9 @@ namespace CatalogService.Api.Controllers
         /// Returns the list of items
         /// </summary>
         /// <response code="200">Returns the list of items</response>
-        [HttpGet(Name =nameof(GetItems))]
+        [HttpGet(Name = nameof(GetItems))]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]        
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IEnumerable<Product> GetItems()
         {
             return _productService.GetProducts();
@@ -144,7 +144,7 @@ namespace CatalogService.Api.Controllers
             product.CategoryId = productDto.CategoryId;
             product.Price = productDto.Price;
             product.SetAmount(productDto.Amount);
-            
+
             _productService.Update(product);
             _logger.LogInformation($"Updated item {product}.");
 

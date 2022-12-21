@@ -13,7 +13,7 @@ namespace CatalogService.Application.IntegrationTests
         private ICategoryRepository _categoryRepository;
 
         public CategoryServiceTests()
-        {          
+        {
             var options = CreateNewContextOptions();
             AppDbContext appDbContext = new AppDbContext(options);
 
@@ -28,8 +28,8 @@ namespace CatalogService.Application.IntegrationTests
         public void ShouldCreateCategory()
         {
             var category1 = new Category("Phones", @"https:\\test.com");
-            var category2 = new Category("Cosmetics", null,1);
-            var category3 = new Category("UsedPhones", @"https:\\test.com",1);            
+            var category2 = new Category("Cosmetics", null, 1);
+            var category3 = new Category("UsedPhones", @"https:\\test.com", 1);
 
             _categoryService.Add(category1);
             _categoryService.Add(category2);
@@ -72,7 +72,7 @@ namespace CatalogService.Application.IntegrationTests
         [Test]
         public void ShouldDeleteCategory()
         {
-            _categoryService.Delete(2);            
+            _categoryService.Delete(2);
 
             var items = _categoryService.GetCategories();
             items.ToList().Count.Should().Be(2);
@@ -87,7 +87,7 @@ namespace CatalogService.Application.IntegrationTests
             string connectionString = configuration.GetConnectionString("DefaultConnection");
 
             var builder = new DbContextOptionsBuilder<AppDbContext>();
-            builder.UseSqlServer(connectionString);                   
+            builder.UseSqlServer(connectionString);
 
             return builder.Options;
         }

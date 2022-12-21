@@ -9,6 +9,6 @@ namespace CatalogService.Application.Common.Interfaces
         Product Add(Product product);
         Task Update(Product product);
         void Delete(int productId);
-        
+
     }
 }

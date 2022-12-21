@@ -1,8 +1,8 @@
+using System.Diagnostics;
 using CatalogService.Api.Dto;
 using CatalogService.Application.Common.Interfaces;
 using CatalogService.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace CatalogService.Api.Controllers
 {
@@ -11,7 +11,7 @@ namespace CatalogService.Api.Controllers
     [Produces("application/json", "application/xml")]
     [Consumes("application/json", "application/xml")]
     public class CategoriesController : ControllerBase
-    {       
+    {
         private readonly ILogger<CategoriesController> _logger;
         private readonly ICategoryService _categoryService;
 
@@ -43,7 +43,7 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetCategoryById([FromRoute]int categoryId)
+        public IActionResult GetCategoryById([FromRoute] int categoryId)
         {
             var category = _categoryService.GetCategory(categoryId);
 
@@ -140,7 +140,7 @@ namespace CatalogService.Api.Controllers
 
             category.UpdateName(categoryDto.Name);
             category.UpdateImageUrl(categoryDto.ImageUrl);
-            
+
             _categoryService.Update(category);
             _logger.LogInformation($"Updated category {category}.");
 

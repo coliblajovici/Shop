@@ -16,7 +16,7 @@ namespace CatalogService.Application
         public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IEventBus eventBus)
         {
             _productRepository = productRepository;
-            _categoryRepository = categoryRepository; 
+            _categoryRepository = categoryRepository;
             _eventBus = eventBus;
         }
 
@@ -58,7 +58,7 @@ namespace CatalogService.Application
                 _productRepository.Update(product);
                 await _eventBus.PublishAsync(productChanged);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }

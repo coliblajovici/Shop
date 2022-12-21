@@ -1,9 +1,9 @@
+using System.Security.Claims;
 using CatalogService.Api.Dto;
 using CatalogService.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web;
-using System.Security.Claims;
 
 namespace CatalogService.Api.Controllers
 {
@@ -12,10 +12,10 @@ namespace CatalogService.Api.Controllers
     [Produces("application/json", "application/xml")]
     [Consumes("application/json", "application/xml")]
     public class ItemPropertiesController : ControllerBase
-    {       
+    {
 
         public ItemPropertiesController()
-        {   
+        {
         }
 
         /// <summary>
@@ -35,19 +35,19 @@ namespace CatalogService.Api.Controllers
         /// </summary>        
         /// <response code="200">The item was found</response>
         /// <response code="404">The item was not found</response>
-        [HttpGet("{itemId:int}", Name =nameof(GetItemPropertiesByItemId))] 
+        [HttpGet("{itemId:int}", Name = nameof(GetItemPropertiesByItemId))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ProductPropertiesDto GetItemPropertiesByItemId([FromRoute]int itemId)
+        public ProductPropertiesDto GetItemPropertiesByItemId([FromRoute] int itemId)
         {
             var propertyPairs = new Dictionary<string, string>();
             propertyPairs["Name"] = "Lipstick";
-            propertyPairs["Description"] = "Very nice lipstick";            
+            propertyPairs["Description"] = "Very nice lipstick";
             propertyPairs["Brand"] = "Very famous brand";
             propertyPairs["Model"] = "s100";
 
-            return new ProductPropertiesDto(){ PropertyPairs = propertyPairs };
-        }       
+            return new ProductPropertiesDto() { PropertyPairs = propertyPairs };
+        }
     }
 }

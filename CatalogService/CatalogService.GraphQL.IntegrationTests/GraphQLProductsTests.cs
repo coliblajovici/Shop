@@ -14,7 +14,7 @@ namespace CatalogService.GraphQL.IntegrationTests
     public class GraphQLProductsTests
     {
         private WebApplicationFactory<Startup> _factory;
-        private HttpClient _client;        
+        private HttpClient _client;
 
         [SetUp]
         public void Setup()
@@ -102,7 +102,7 @@ namespace CatalogService.GraphQL.IntegrationTests
               }",
               new
               {
-                  id= 3,
+                  id = 3,
                   product = new
                   {
                       name = "Test Update GraphQL",
