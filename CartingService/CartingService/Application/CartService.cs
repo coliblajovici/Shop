@@ -7,7 +7,7 @@ namespace CartingService.Application
 {
     public class CartService: ICartService
     {
-        ICartRepository _cartRepository;
+        private readonly ICartRepository _cartRepository;
 
         public CartService(ICartRepository cartRepository)
         {
@@ -16,19 +16,16 @@ namespace CartingService.Application
 
         public Cart GetCart(Guid cartId)
         {
-            //TODO map CartItem to the Domain Cart Item
             return _cartRepository.GetCart(cartId);
         }
 
         public IList<CartItem> GetItems(Guid cartId)
         {
-            //TODO map CartItem to the Domain Cart Item
             return _cartRepository.GetCartItems(cartId);
         }
 
         public void AddItem(Guid cartId, CartItem cartItem)
         {
-            //TODO map CartItem to the Domain Cart Item
             if (String.IsNullOrEmpty(cartItem.Name)) throw new InvalidItemException("Invalid Item Exception");
 
             _cartRepository.AddCartItem(cartId, cartItem);

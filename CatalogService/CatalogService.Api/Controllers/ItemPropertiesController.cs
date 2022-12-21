@@ -13,20 +13,9 @@ namespace CatalogService.Api.Controllers
     [Consumes("application/json", "application/xml")]
     public class ItemPropertiesController : ControllerBase
     {       
-        private readonly ILogger<ItemsController> _logger;
-        private readonly IProductService _productService;        
-        private readonly IHttpContextAccessor _contextAccessor;
 
-        private string _currentPrincipalId = string.Empty;
-
-
-        public ItemPropertiesController(IProductService productService, ILogger<ItemsController> logger, IHttpContextAccessor contextAccessor)
-        {
-            _productService = productService ?? throw new ArgumentNullException(nameof(productService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));            
-            _contextAccessor = contextAccessor;
-
-            _currentPrincipalId = GetCurrentClaimsPrincipal()?.GetObjectId();
+        public ItemPropertiesController()
+        {   
         }
 
         /// <summary>
@@ -52,8 +41,6 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ProductPropertiesDto GetItemPropertiesByItemId([FromRoute]int itemId)
         {
-            //var product = _productService.GetProduct(itemId);
-
             var propertyPairs = new Dictionary<string, string>();
             propertyPairs["Name"] = "Lipstick";
             propertyPairs["Description"] = "Very nice lipstick";            
@@ -62,22 +49,5 @@ namespace CatalogService.Api.Controllers
 
             return new ProductPropertiesDto(){ PropertyPairs = propertyPairs };
         }       
-
-        /// <summary>
-        /// returns the current claimsPrincipal (user/Client app) dehydrated from the Access token
-        /// </summary>
-        /// <returns></returns>
-        private ClaimsPrincipal GetCurrentClaimsPrincipal()
-        {
-            // Irrespective of whether a user signs in or not, the AspNet security middle-ware dehydrates the claims in the
-            // HttpContext.User.Claims collection
-
-            if (_contextAccessor.HttpContext != null && _contextAccessor.HttpContext.User != null)
-            {
-                return _contextAccessor.HttpContext.User;
-            }
-
-            return null;
-        }
     }
 }

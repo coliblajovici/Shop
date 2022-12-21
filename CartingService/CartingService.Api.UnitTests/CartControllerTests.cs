@@ -97,7 +97,7 @@ namespace CartingService.Api.UnitTests
             result.Should().BeOfType<OkResult>();
         }
 
-        private Cart CreateCart()
+        private static Cart CreateCart()
         {
             var cart = new Cart()
             {

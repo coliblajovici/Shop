@@ -38,8 +38,6 @@ builder.Services.AddOcelot()
 
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
-//builder.Services.AddSingletonDefinedAggregator<>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
