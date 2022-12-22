@@ -5,7 +5,7 @@ namespace CatalogService.Infrastructure.Data
 {
     public class ProductRepository : IProductRepository
     {
-        private AppDbContext _appDbContext;
+        private readonly AppDbContext _appDbContext;
 
         public ProductRepository(AppDbContext appDbContext)
         {

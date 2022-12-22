@@ -50,7 +50,7 @@ namespace CatalogService.Api.Controllers
 
             if (cart == null)
             {
-                _logger.LogWarning($"Cart with Id {cartId} cannot be found.");
+                _logger.LogWarning("Cart with Id {cartId} cannot be found.", cartId);
                 return NotFound();
             }
 
@@ -74,7 +74,7 @@ namespace CatalogService.Api.Controllers
 
             if (cart == null)
             {
-                _logger.LogWarning($"Cart with Id {cartId} cannot be found.");
+                _logger.LogWarning("Cart with Id {cartId} cannot be found.", cartId);
                 return NotFound();
             }
 
@@ -100,7 +100,7 @@ namespace CatalogService.Api.Controllers
             item.Price = cartItem.Price;
 
             _cartService.AddItem(cartId, item);
-            _logger.LogInformation($"Added item {item.Id}, {item.Name} to cart with Id {cartId}.");
+            _logger.LogInformation("Added item {d}, {Name} to cart with Id {cartId}.", item.Id, item.Name, cartId);
 
             return Ok();
         }
@@ -126,7 +126,7 @@ namespace CatalogService.Api.Controllers
             }
 
             _cartService.RemoveItem(cartId, cartItemId);
-            _logger.LogInformation($"Removed item {cartItemId} from cart with Id {cartId}.");
+            _logger.LogInformation("Removed item {cartItemId} from cart with Id {cartId}.", cartItemId, cartId);
 
             return Ok();
         }

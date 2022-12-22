@@ -41,6 +41,8 @@ namespace DotnetGraphQL
             services.AddSingleton<ICategoryService, CategoryService>();
             services.AddSingleton<IProductService, ProductService>();
 
+            services.ConfigureServiceBus(Configuration);
+
             services.AddGraphQL(b => b
                              .AddHttpMiddleware<ISchema>()
                              .AddUserContextBuilder(httpContext => new GraphQLUserContext { User = httpContext.User })

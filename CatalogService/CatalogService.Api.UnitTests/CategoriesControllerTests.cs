@@ -53,7 +53,7 @@ namespace CatalogService.Api.UnitTests
             var controller = new CategoriesController(categoryServiceStub.Object, loggerStub.Object);
 
             var result = controller.GetCategoryList();
-        
+
             var categoryList = (result as OkObjectResult).Value;
             categoryList.Should().BeEquivalentTo(expectedCategories);
         }
@@ -161,7 +161,7 @@ namespace CatalogService.Api.UnitTests
             result.Should().BeOfType<NotFoundResult>();
         }
 
-        private Category CreateCategory()
+        private static Category CreateCategory()
         {
             var category = new Category("Test Name", "https://test.com");
             return category;

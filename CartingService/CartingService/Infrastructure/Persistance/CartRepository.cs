@@ -1,5 +1,4 @@
-﻿using System.Xml;
-using CartingService.Domain.Entities;
+﻿using CartingService.Domain.Entities;
 using CartingService.Persistance.Exceptions;
 using LiteDB;
 

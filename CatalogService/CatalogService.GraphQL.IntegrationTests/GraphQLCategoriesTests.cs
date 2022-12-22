@@ -167,7 +167,7 @@ namespace CatalogService.GraphQL.IntegrationTests
             response.Errors.Should().BeNullOrEmpty();
         }
 
-        private CategoryResponse GetCategory()
+        private static CategoryResponse GetCategory()
         {
             return new CategoryResponse
             {
@@ -177,7 +177,7 @@ namespace CatalogService.GraphQL.IntegrationTests
             };
         }
 
-        private CategoryResponse GetAddCategory()
+        private static CategoryResponse GetAddCategory()
         {
             return new CategoryResponse
             {
@@ -187,7 +187,7 @@ namespace CatalogService.GraphQL.IntegrationTests
             };
         }
 
-        private CategoryResponse GetUpdateCategory()
+        private static CategoryResponse GetUpdateCategory()
         {
             return new CategoryResponse
             {

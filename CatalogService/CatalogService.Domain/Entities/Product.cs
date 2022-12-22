@@ -21,6 +21,7 @@ namespace CatalogService.Domain.Entities
             CategoryId = categoryId;
             Price = price;
             SetAmount(amount);
+
         }
 
         public void SetAmount(int amount)

@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using ShopServiceBusClient;
 
-namespace CatalogService.Api.Setup
+namespace DotnetGraphQL
 {
     internal static class ServiceBusSetup
     {
@@ -13,14 +13,6 @@ namespace CatalogService.Api.Setup
         {
 
             services.Configure<EventBusConfiguration>(configuration.GetSection("ServiceBusConfig"));
-            /*  services.AddSingleton<IEventBus, AzureServiceBus>(sp =>
-              {                             
-                  var logger = sp.GetRequiredService<ILogger<AzureServiceBus>>();                
-                  string connectionString = configuration.GetConnectionString("EventBusConnection");
-
-                  return new AzureServiceBus(connectionString, logger);
-              });*/
-
 
             var eventBusConfiguration = services.BuildServiceProvider().GetRequiredService<IOptions<EventBusConfiguration>>().Value;
             services.AddSingleton<EventBusConfiguration>(eventBusConfiguration);

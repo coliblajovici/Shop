@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShopServiceBusClient
+﻿namespace ShopServiceBusClient
 {
     public interface IEventBusSubscriptionsManager
     {
@@ -85,8 +79,7 @@ namespace ShopServiceBusClient
             return typeof(T).Name;
         }
 
-        public Type GetEventTypeByName(string eventName) => _eventTypes
-                                                            .SingleOrDefault(t => t.Name == eventName);
+        public Type GetEventTypeByName(string eventName) => _eventTypes.SingleOrDefault(t => t.Name == eventName);
 
         public IEnumerable<SubscriptionInfo> GetHandlersForEvent<T>() where T : IntegrationEvent
         {

@@ -49,7 +49,7 @@ namespace CatalogService.Api.Controllers
 
             if (category == null)
             {
-                _logger.LogWarning($"Category with id {categoryId} not found");
+                _logger.LogWarning("Category with id {categoryId} not found", categoryId);
                 return NotFound();
             }
 
@@ -85,7 +85,7 @@ namespace CatalogService.Api.Controllers
 
             var createdCategory = _categoryService.Add(category);
 
-            _logger.LogInformation($"Added category with id {createdCategory.Id}. New category: {category}");
+            _logger.LogInformation("Added category with id {id}. New category: {category}", createdCategory.Id, category);
 
             return CreatedAtAction(
               actionName: nameof(GetCategoryById),
@@ -113,7 +113,7 @@ namespace CatalogService.Api.Controllers
             }
 
             _categoryService.Delete(categoryId);
-            _logger.LogInformation($"Deleted category with id {categoryId}.");
+            _logger.LogInformation("Deleted category with id {categoryId}.", categoryId);
 
             return NoContent();
         }
@@ -145,7 +145,7 @@ namespace CatalogService.Api.Controllers
             }
 
             _categoryService.Update(category);
-            _logger.LogInformation($"Updated category {category}.");
+            _logger.LogInformation("Updated category {category}.", category);
 
             return NoContent();
         }

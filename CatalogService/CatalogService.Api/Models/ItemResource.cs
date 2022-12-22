@@ -61,7 +61,7 @@ namespace CatalogService.Api.Models
 
             if (href == null)
             {
-                href = string.Empty; 
+                href = string.Empty;
             }
 
             var resource = new ResourceLink(
