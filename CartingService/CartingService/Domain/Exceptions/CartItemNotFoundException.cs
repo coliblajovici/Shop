@@ -17,5 +17,9 @@ namespace CartingService.Persistance.Exceptions
             : base($"CartItemId  \"{cartItemId}\" in cart with Id {cartId} was not found.")
         {
         }
+
+        protected CartItemNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) 
+        {
+        }
     }
 }

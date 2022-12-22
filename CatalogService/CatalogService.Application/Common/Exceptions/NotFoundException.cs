@@ -1,5 +1,8 @@
-﻿namespace CatalogService.Application.Common.Exceptions
+﻿using System.Runtime.Serialization;
+
+namespace CatalogService.Application.Common.Exceptions
 {
+    [Serializable]
     public class NotFoundException : Exception
     {
         public NotFoundException()
@@ -19,6 +22,10 @@
 
         public NotFoundException(string name, object key)
             : base($"Entity \"{name}\" ({key}) was not found.")
+        {
+        }
+
+        protected NotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
